@@ -1,0 +1,107 @@
+{
+  "courses": [
+    {
+      "title": "Database Management Systems",
+      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "category": "intermediate",
+      "id": 1
+    },
+    {
+      "title": "Introduction to Programming",
+      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
+      "category": "beginner",
+      "id": 2
+    },
+    {
+      "title": "Theory of Computation",
+      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "category": "advanced",
+      "id": 3
+    },
+    {
+      "title": "Object Oriented Programming",
+      "details": "Mario ipsum RGB mushroom 1-up. Cloud lakitu slide fire flower pipe jump swim, lava slide koopa troopa side-scrolling starman fire bar koopa paratroopa! Pipe cloud buzzy beetle koopa troopa game over, goomba invincible Mario green shell slide koopa paratroopa fire bar question block 1985 koopa troopa fireball Mushroom Kingdom. Lava Mushroom Kingdom.",
+      "category": "advanced",
+      "id": 4
+    },
+    {
+      "title": "Software Engineering",
+      "details": "Mario ipsum RGB mushroom 1-up. Cloud lakitu slide fire flower pipe jump swim, lava slide koopa troopa side-scrolling starman fire bar koopa paratroopa! Pipe cloud buzzy beetle koopa troopa game over, goomba invincible Mario green shell slide koopa paratroopa fire bar question block 1985 koopa troopa fireball Mushroom Kingdom. Lava Mushroom Kingdom. Mario ipsum RGB mushroom 1-up. Cloud lakitu slide fire flower pipe jump swim, lava slide koopa troopa side-scrolling starman fire bar koopa paratroopa! Pipe cloud buzzy beetle koopa troopa game over, goomba invincible Mario green shell slide koopa paratroopa fire bar question block 1985 koopa troopa fireball Mushroom Kingdom. Lava Mushroom Kingdom.",
+      "category": "intermediate",
+      "id": 5
+    },
+    {
+      "title": "Machine Learning",
+      "details": "Mario ipsum RGB mushroom 1-up. Cloud lakitu slide fire flower pipe jump swim, lava slide koopa troopa side-scrolling starman fire bar koopa paratroopa! Pipe cloud buzzy beetle koopa troopa game over, goomba invincible Mario green shell slide koopa paratroopa fire bar question block 1985 koopa troopa fireball Mushroom Kingdom. Lava Mushroom Kingdom.",
+      "category": "expert",
+      "id": 6
+    },
+    {
+      "title": "Artificial Intelligence",
+      "details": "Mario ipsum RGB mushroom 1-up. Cloud lakitu slide fire flower pipe jump swim, lava slide koopa troopa side-scrolling starman fire bar koopa paratroopa! Pipe cloud buzzy beetle koopa troopa game over, goomba invincible Mario green shell slide koopa paratroopa fire bar question block 1985 koopa troopa fireball Mushroom Kingdom. Lava Mushroom Kingdom.",
+      "category": "expert",
+      "id": 7
+    },
+    {
+      "title": "Linear Algebra",
+      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "category": "advanced",
+      "id": 8
+    },
+    {
+      "title": "Engineering Physics",
+      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "category": "beginner",
+      "id": 9
+    },
+    {
+      "title": "Data Mining",
+      "details": "Mario ipsum RGB mushroom 1-up. Cloud lakitu slide fire flower pipe jump swim, lava slide koopa troopa side-scrolling starman fire bar koopa paratroopa! Pipe cloud buzzy beetle koopa troopa game over, goomba invincible Mario green shell slide koopa paratroopa fire bar question block 1985 koopa troopa fireball Mushroom Kingdom. Lava Mushroom Kingdom.",
+      "category": "expert",
+      "id": 10
+    },
+    {
+      "title": "Operating Systems",
+      "details": "lorem ipsum dolor sit amet",
+      "category": "expert",
+      "id": 11
+    }
+  ],
+  "users": [
+    {
+      "firstname": "Prasanth",
+      "lastname": "Kota",
+      "email": "iit2019062@iiita.ac.in",
+      "password": "8688889762",
+      "id": 1
+    },
+    {
+      "firstName": "Harsh",
+      "lastName": "Meena",
+      "email": "iit2019005@iiita.ac.in",
+      "password": "1234567890",
+      "id": 2
+    },
+    {
+      "firstName": "Test",
+      "lastName": "Faculty",
+      "email": "faculty@iiita.ac.in",
+      "password": "faculty123",
+      "id": 3
+    },
+    {
+      "firstName": "Test",
+      "lastName": "User",
+      "email": "TestUser@iiita.ac.in",
+      "password": "userpwd",
+      "id": 4
+    },
+    {
+      "firstName": "Test",
+      "lastName": "Admin",
+      "email": "TestAdmin@iiita.ac.in",
+      "password": "adminpwd",
+      "id": 5
+    }
+  ]
+}

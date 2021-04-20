@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,19 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Copyright from '../components/Copyright'
+import { useHistory } from 'react-router';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -48,10 +38,46 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const history = useHistory();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [fnameError, setFnameError] = useState(false);
+  const [lnameError, setLnameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Added new user');
+    setEmailError(false);
+    setPasswordError(false);
+
+    if (firstName === '') {
+      setFnameError(true)
+    }
+    if (lastName==='') {
+      setLnameError(true)
+    }
+    if (email === '') {
+      setEmailError(true)
+    }
+    if(password === ''){
+      setPasswordError(true)
+    }
+    if (email && password) {
+      fetch('http://localhost:8000/users', {
+        method: 'POST',
+        headers: {"Content-type": "application/json"},
+        body: JSON.stringify({ firstName, lastName, email,password })
+      }).then(() => history.push('/'))
+    } 
+  }
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -59,7 +85,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -71,6 +97,9 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                color="secondary"
+                error={fnameError}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -82,6 +111,10 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                color="secondary"
+                error={lnameError}
+                onChange={(e) => setLastName(e.target.value)}
+                
               />
             </Grid>
             <Grid item xs={12}>
@@ -92,7 +125,10 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
+                autoComplete="off"
+                color="secondary"
+                error = {emailError}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -104,7 +140,10 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="off"
+                color="secondary"
+                error = {passwordError}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
             {/* <Grid item xs={12}>
@@ -118,14 +157,14 @@ export default function SignUp() {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
           >
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/signin" variant="body2">
+              <Link href="/signin" variant="body2" color="secondary">
                 Already have an account? Sign in
               </Link>
             </Grid>

@@ -1,38 +1,67 @@
 import { useState } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom'
 import useToken from './components/useToken'
-import Dashboard from './pages/Dashboard'
+import Home from './pages/Home'
 import Settings from './pages/Settings'
 import SignIn from './pages/SignIn'
-import Signup from './pages/SignUp'
+import SignUp from './pages/SignUp'
+import {Redirect} from 'react-router-dom'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core'
+import Layout from './components/Layout'
+import CreateCourse from './forms/CreateCourse'
+import { blue } from '@material-ui/core/colors'
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#fefefe'
+    },
+    secondary:blue
+  },
+  typography: {
+    fontFamily: 'Quicksand',
+    fontWeightLight: 400,
+    fontWeightRegular: 500,
+    fontWeightMedium: 600,
+    fontWeightBold: 700,
+  }
+})
 
 function App() {
 
-  //const [token,setToken] = useState();
   const {token,setToken} = useToken();
+  if(!token) {
+    return <SignIn setToken={setToken} />
+  }
+
   
 
-  if(!token){
-    return <SignIn setToken={setToken}/>
-  }
+  // if(!token){
+  //   return <SignIn setToken={setToken}/>
+  // }
   return (
-    <Router>
-          <Switch>
+    <ThemeProvider theme={theme}>
+      <Router>
+      <Layout>
+        <Switch>
             <Route exact path="/">
-              <Signup />
+              {token ? <Redirect to="/home"/> : <SignUp/>}
             </Route>
             <Route path="/signin">
-              <SignIn />
+              {token ? <Redirect to="/home"/> : <SignIn/>}
             </Route>
-            <Route path = "/dashboard">
-              <Dashboard/>
+            <Route path = "/home">
+              <Home/>
             </Route>
-            <Route path = "/settings">
-              <Settings/>
+            <Route path = "/create">
+              <CreateCourse/>
             </Route>
           </Switch>
+      </Layout>
     </Router>
+
+    </ThemeProvider>
+    
   );
 }
 

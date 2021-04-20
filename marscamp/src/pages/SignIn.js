@@ -13,19 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types'
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Copyright from '../components/Copyright'
 
 const loginUser = async (credentials) =>{
   return fetch('http://localhost:5000/login',{
@@ -86,6 +74,7 @@ export default function SignIn({setToken}) {
           <TextField
             variant="outlined"
             margin="normal"
+            color="secondary"
             required
             fullWidth
             id="email"
@@ -98,6 +87,7 @@ export default function SignIn({setToken}) {
           <TextField
             variant="outlined"
             margin="normal"
+            color="secondary"
             required
             fullWidth
             name="password"
@@ -108,26 +98,26 @@ export default function SignIn({setToken}) {
             onChange={e=>setPassword(e.target.value)}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" color="secondary" />}
             label="Remember me"
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.submit}
           >
             Sign In
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="#" variant="body2" color="secondary">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/" variant="body2">
+              <Link href="/" variant="body2" color="secondary">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
