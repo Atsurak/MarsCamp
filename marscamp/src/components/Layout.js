@@ -67,6 +67,11 @@ export default function Layout({ children }) {
       icon: <AddCircleOutlineOutlined color="secondary" />, 
       path: '/create' 
     },
+    {
+      text : 'Create Post',
+      icon : <AddCircleOutlineOutlined color="secondary" />,
+      path : '/post'
+    }
   ];
 
   return (

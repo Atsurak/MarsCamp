@@ -9,6 +9,7 @@ import {Redirect} from 'react-router-dom'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 import Layout from './components/Layout'
 import CreateCourse from './forms/CreateCourse'
+import CreatePost from './forms/CreatePost'
 import { blue } from '@material-ui/core/colors'
 
 const theme = createMuiTheme({
@@ -55,6 +56,9 @@ function App() {
             </Route>
             <Route path = "/create">
               <CreateCourse/>
+            </Route>
+            <Route>
+              <CreatePost/>
             </Route>
           </Switch>
       </Layout>

@@ -65,6 +65,12 @@
       "details": "lorem ipsum dolor sit amet",
       "category": "expert",
       "id": 11
+    },
+    {
+      "title": "Principles of Programming Languages",
+      "details": "Mario ipsum RGB mushroom 1-up. Cloud lakitu slide fire flower pipe jump swim, lava slide koopa troopa side-scrolling starman fire bar koopa paratroopa! Pipe cloud buzzy beetle koopa troopa game over, goomba invincible Mario green shell slide koopa paratroopa fire bar question block 1985 koopa troopa fireball Mushroom Kingdom. Lava Mushroom Kingdom.",
+      "category": "intermediate",
+      "id": 12
     }
   ],
   "users": [
@@ -102,6 +108,35 @@
       "email": "TestAdmin@iiita.ac.in",
       "password": "adminpwd",
       "id": 5
+    }
+  ],
+  "posts": [
+    {
+      "title": "Hello",
+      "details": "World",
+      "type": "announcement",
+      "timeStamp": "2021-04-21T10:22:27.498Z",
+      "id": 1
+    },
+    {
+      "title": "C1 Tommorrow at 3 PM",
+      "details": "All the Best!",
+      "type": "announcement",
+      "timeStamp": "2021-04-21T10:23:12.267Z",
+      "id": 2
+    }
+  ],
+  "formats": [
+    {
+      "title": "",
+      "details": "",
+      "timeStamp": "",
+      "user_id": "",
+      "course_id": "",
+      "id": "1",
+      "type": "announcement",
+      "typeTest": "then what",
+      "TestKey": "['A','B','D','E']"
     }
   ]
 }

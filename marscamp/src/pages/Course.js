@@ -4,7 +4,7 @@ import Masonry from 'react-masonry-css'
 import NoteCard from '../components/NoteCard'
 
 export default function Home() {
-  const [course, setCourse] = useState([]);
+  const [course, setCourse] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:8000/courses'+id)
