@@ -41,14 +41,3 @@ export default function Home() {
     </Container>
   )
 }
-
-// import CreateCourse from '../forms/CreateCourse'
-// const Home = () => {
-//     return ( 
-//         <div>
-//             <CreateCourse/>
-//         </div>
-//      );
-// }
- 
-// export default Home;

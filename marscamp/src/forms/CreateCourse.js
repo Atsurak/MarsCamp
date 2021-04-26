@@ -30,7 +30,7 @@ export default function CreateCourse() {
   const [category, setCategory] = useState('beginner');
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setTitleError(false)
     setDetailsError(false)
 
