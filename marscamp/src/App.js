@@ -11,6 +11,8 @@ import Layout from './components/Layout'
 import CreateCourse from './forms/CreateCourse'
 import CreatePost from './forms/CreatePost'
 import { blue } from '@material-ui/core/colors'
+import { Forum } from '@material-ui/icons'
+import ForumPost from './forms/ForumPost'
 
 const theme = createMuiTheme({
   palette: {
@@ -56,6 +58,9 @@ function App() {
             </Route>
             <Route path = "/create">
               <CreateCourse/>
+            </Route>
+            <Route path = "/forum">
+              <ForumPost/>
             </Route>
             <Route>
               <CreatePost/>

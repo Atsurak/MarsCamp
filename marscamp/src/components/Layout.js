@@ -1,17 +1,10 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core'
-import Drawer from '@material-ui/core/Drawer'
-import Typography from '@material-ui/core/Typography'
-import { useHistory, useLocation } from 'react-router-dom'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import { AddCircleOutlineOutlined, SubjectOutlined } from '@material-ui/icons'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import { format } from 'date-fns'
-import Avatar from '@material-ui/core/Avatar'
+import React from 'react';
+import { makeStyles, Avatar, Drawer, Toolbar, Typography, AppBar, Link } from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
+import { AddCircleOutlineOutlined, ForumOutlined, SubjectOutlined } from '@material-ui/icons'
+import { useHistory, useLocation } from 'react-router-dom';
+import { format } from 'date-fns';
+import SimpleMenu from './SimpleMenu';
 
 const drawerWidth = 240
 
@@ -71,6 +64,11 @@ export default function Layout({ children }) {
       text : 'Create Post',
       icon : <AddCircleOutlineOutlined color="secondary" />,
       path : '/post'
+    },
+    {
+      text : 'Forum',
+      icon : <ForumOutlined color="secondary" />,
+      path : '/forum'
     }
   ];
 
@@ -87,7 +85,7 @@ export default function Layout({ children }) {
           <Typography className={classes.date}>
             Today is the {format(new Date(), 'do MMMM Y')}
           </Typography>
-          <Typography>Mario</Typography>
+          <Typography><SimpleMenu/></Typography>
           <Avatar className={classes.avatar} src="/mario-av.png" alt = "M" />
         </Toolbar>
       </AppBar>
@@ -101,7 +99,7 @@ export default function Layout({ children }) {
       >
         <div>
           <Typography variant="h5" className={classes.title}>
-            Mars Camp
+            <Link href="/" color="inherit" underline="none">Mars Camp</Link>
           </Typography>
         </div>
 
