@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import {FormControl, FormLabel, RadioGroup, Radio}from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -43,35 +43,26 @@ export default function SignUp() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [fnameError, setFnameError] = useState(false);
-  const [lnameError, setLnameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [regno,setRegNo] = useState('');
+  const [mobno,setMobNo] = useState('');
+  const [type,setType] = useState('STUDENT');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Added new user');
-    setEmailError(false);
-    setPasswordError(false);
+    const Name = firstName + ' ' + lastName;
 
-    if (firstName === '') {
-      setFnameError(true)
-    }
-    if (lastName==='') {
-      setLnameError(true)
-    }
-    if (email === '') {
-      setEmailError(true)
-    }
-    if(password === ''){
-      setPasswordError(true)
-    }
-    if (email && password) {
-      fetch('http://localhost:8000/users', {
+    if (Name && email && password) {
+      fetch('http://localhost:5000/auth/signup', {
         method: 'POST',
         headers: {"Content-type": "application/json"},
-        body: JSON.stringify({ firstName, lastName, email,password })
-      }).then(() => history.push('/'))
+        body: JSON.stringify({ reg_no:regno,ph_no:mobno,email:email,name:Name,user_type:type,pwd:password})
+      }).then(data => {
+        data.json();
+        console.log(data);
+      })
+      .then(() => history.push('/'))
+      .catch(err=>{console.log(err)})
     } 
   }
 
@@ -98,7 +89,6 @@ export default function SignUp() {
                 label="First Name"
                 autoFocus
                 color="secondary"
-                error={fnameError}
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </Grid>
@@ -112,9 +102,21 @@ export default function SignUp() {
                 name="lastName"
                 autoComplete="lname"
                 color="secondary"
-                error={lnameError}
                 onChange={(e) => setLastName(e.target.value)}
                 
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="reg_no"
+                label="Enrollment / Registration No"
+                name="reg_no"
+                autoComplete="off"
+                color="secondary"
+                onChange={(e) => setRegNo(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -127,7 +129,6 @@ export default function SignUp() {
                 name="email"
                 autoComplete="off"
                 color="secondary"
-                error = {emailError}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
@@ -142,16 +143,31 @@ export default function SignUp() {
                 id="password"
                 autoComplete="off"
                 color="secondary"
-                error = {passwordError}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
-            {/* <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="faculty" color="primary" />}
-                label="Request for a Faculty Position"
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="ph_no"
+                label="Contact No"
+                name="mobno"
+                autoComplete="off"
+                color="secondary"
+                onChange={(e) => setMobNo(e.target.value)}
               />
-            </Grid> */}
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl color="secondary">
+              <FormLabel>I am a </FormLabel>
+                <RadioGroup row value={type} onChange={(e) => setType(e.target.value)}>
+                    <FormControlLabel value="STUDENT" control={<Radio />} label="Student" />
+                    <FormControlLabel value="FACULTY" control={<Radio />} label="Faculty" />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
           </Grid>
           <Button
             type="submit"
@@ -164,7 +180,7 @@ export default function SignUp() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/signin" variant="body2" color="secondary">
+              <Link href="/" variant="body2" color="secondary">
                 Already have an account? Sign in
               </Link>
             </Grid>

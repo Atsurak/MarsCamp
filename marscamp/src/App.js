@@ -11,7 +11,6 @@ import Layout from './components/Layout'
 import CreateCourse from './forms/CreateCourse'
 import CreatePost from './forms/CreatePost'
 import { blue } from '@material-ui/core/colors'
-import { Forum } from '@material-ui/icons'
 import ForumPost from './forms/ForumPost'
 
 const theme = createMuiTheme({
@@ -34,24 +33,37 @@ function App() {
 
   const {token,setToken} = useToken();
   if(!token) {
-    return <SignIn setToken={setToken} />
+    return (
+      <ThemeProvider theme={theme}>
+      <Router>
+        <Switch>
+            <Route exact path="/">
+              {token ? <Redirect to="/home"/> : <SignIn setToken={setToken}/>}
+            </Route>
+            <Route path="/signup">
+              {token ? <Redirect to="/home"/> : <SignUp/>}
+            </Route>
+            <Route>
+              <SignIn setToken={setToken}/>
+            </Route>
+          </Switch>
+      </Router>
+    </ThemeProvider>
+    )
   }
-
-  
-
   // if(!token){
   //   return <SignIn setToken={setToken}/>
   // }
   return (
     <ThemeProvider theme={theme}>
       <Router>
-      <Layout>
         <Switch>
-            <Route exact path="/">
-              {token ? <Redirect to="/home"/> : <SignUp/>}
+           <Route path = "/signin">
+              <SignIn setToken={setToken}/>
             </Route>
-            <Route path="/signin">
-              {token ? <Redirect to="/home"/> : <SignIn/>}
+        <Layout>
+            <Route exact path="/">
+              {token ? <Redirect to="/home"/> : <SignIn setToken={setToken}/>}
             </Route>
             <Route path = "/home">
               <Home/>
@@ -63,10 +75,11 @@ function App() {
               <ForumPost/>
             </Route>
             <Route>
-              <CreatePost/>
+              <Home/>
             </Route>
+            </Layout>
           </Switch>
-      </Layout>
+      
     </Router>
 
     </ThemeProvider>
