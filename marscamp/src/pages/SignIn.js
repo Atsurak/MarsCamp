@@ -6,14 +6,10 @@ import Copyright from '../components/Copyright';
 import { useHistory } from 'react-router';
 
 const loginUser = async (credentials) =>{
-  return fetch('http://localhost:5000/login',{
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-  .then(data => data.json())
+  const req = 'http://localhost:5000/auth/login?'+'email='+credentials.email+'&pwd='+credentials.password ;
+  console.log(req);
+  return fetch(req)
+  .then(data=>data.json())
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -38,14 +34,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn({setToken}) {
   const classes = useStyles();
-  const [userName,setuserName] = useState();
+  const [email,setEmail] = useState();
   const [password,setPassword] = useState();
   const history = useHistory();
 
   const handleSubmit = async e =>{
     e.preventDefault();
     const token = await loginUser({
-      userName,
+      email,
       password
     });
     setToken(token);
@@ -74,7 +70,7 @@ export default function SignIn({setToken}) {
             name="email"
             autoComplete="off"
             autoFocus
-            onChange = {e=>setuserName(e.target.value)}
+            onChange = {e=>setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
