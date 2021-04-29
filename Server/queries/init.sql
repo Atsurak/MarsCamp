@@ -63,7 +63,10 @@ ALTER TABLE instructor
 MODIFY COLUMN faculty_id INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE instructor
 MODIFY COLUMN course_id INT;
-ALTER TABLE users ADD pwd VARCHAR(100) NOT NULL;
+ALTER TABLE users MODIFY COLUMN pwd VARCHAR(100) NOT NULL;
+ALTER TABLE student MODIFY COLUMN course_id INT;
+ALTER TABLE users ADD CONSTRAINT email_const UNIQUE (email);
+ALTER TABLE student ADD CONSTRAINT student_const UNIQUE (user_id, course_id);
 
 DESCRIBE users;
 DESCRIBE courses;
