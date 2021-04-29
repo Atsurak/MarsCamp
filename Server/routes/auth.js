@@ -25,14 +25,34 @@ router.get('/login', (req, res) => {
                     } else if (result[0].user_type==='FACULTY'){
                         sql_getinf = 'SELECT users.registration_no, users.phone_no, users.email, users.first_and_last_name, users.user_type, instructor.course_id FROM instructor INNER JOIN users ON instructor.user_id = users.registration_no WHERE users.email = ?'
                     } else if (result[0].user_type==='STUDENT'){
-                        sql_getinf = 'SELECT users.registration_no, users.phone_no, users.email, users.first_and_last_name, users.user_type, student.course_id FROM student INNER JOIN users ON student.user_id = users.registration_no WHERE users.email = ?'
+                        sql_getinf = 'SELECT registration_no, phone_no, email, first_and_last_name, user_type FROM users WHERE email = ?'
                     }
                     mclient.query(sql_getinf, [email], function(err, result){
                         if (err){
                             console.log(err)
                         }
                         else{
-                            res.json(result)
+                            var final_result = [result[0]]
+                            if (result[0].user_type==='STUDENT'){
+                                var sql_stud = 'SELECT course_id FROM student WHERE user_id = ?'
+                                mclient.query(sql_stud, [result[0].registration_no], function(err, result){
+                                    if (err){
+                                        console.log(err)
+                                    }
+                                    else{
+                                        var courses = []
+                                        for (r of result){
+                                            courses.push(r.course_id)
+                                        }
+                                        final_result.push(courses)
+                                        res.json(final_result)
+                                        done=true
+                                    }
+                                })
+                            }else {
+                                res.json(result)
+                            }
+                            
                         }
                     })
                 } else{
