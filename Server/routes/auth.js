@@ -23,7 +23,7 @@ router.get('/login', (req, res) => {
                     if (result[0].user_type==='ADMIN'){
                         sql_getinf = 'SELECT users.registration_no, users.phone_no, users.email, users.first_and_last_name, users.user_type FROM users WHERE email = ?'
                     } else if (result[0].user_type==='FACULTY'){
-                        sql_getinf = 'SELECT users.registration_no, users.phone_no, users.email, users.first_and_last_name, users.user_type, instructor.course_id FROM instructor INNER JOIN users ON instructor.user_id = users.registration_no WHERE users.email = ?'
+                        sql_getinf = 'SELECT users.registration_no, users.phone_no, users.email, users.first_and_last_name, users.user_type, instructor.course_id, instructor.approval FROM instructor INNER JOIN users ON instructor.user_id = users.registration_no WHERE users.email = ?'
                     } else if (result[0].user_type==='STUDENT'){
                         sql_getinf = 'SELECT registration_no, phone_no, email, first_and_last_name, user_type FROM users WHERE email = ?'
                     }
