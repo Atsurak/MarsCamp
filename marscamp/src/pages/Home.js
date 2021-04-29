@@ -7,13 +7,13 @@ export default function Home() {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/courses')
+    fetch('http://localhost:5000/courses/get')
       .then(res => res.json())
       .then(data => setNotes(data))
   }, [])
 
   const handleDelete = async (id) => {
-    await fetch('http://localhost:8000/courses/' + id, {
+    await fetch('http://localhost:5000/courses/' + id, {
       method: 'DELETE'
     })
     const newNotes = notes.filter(note => note.id != id)
@@ -33,7 +33,7 @@ export default function Home() {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column">
         {notes.map(note => (
-          <div key={note.id}>
+          <div key={note.course_id}>
             <NoteCard note={note} handleDelete={handleDelete} />
           </div>
         ))}

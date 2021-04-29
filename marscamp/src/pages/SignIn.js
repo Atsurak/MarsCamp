@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 const loginUser = async (credentials) =>{
   const req = 'http://localhost:5000/auth/login?'+'email='+credentials.email+'&pwd='+credentials.password ;
   console.log(req);
-  return fetch(req)
+  return await fetch(req)
   .then(data=>data.json())
 }
 

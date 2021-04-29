@@ -45,9 +45,9 @@ const useStyles = makeStyles((theme) => {
 })
 
 export default function Layout({ children }) {
-  const classes = useStyles()
-  const history = useHistory()
-  const location = useLocation()
+  const classes = useStyles();
+  const history = useHistory();
+  const location = useLocation();
 
   const menuItems = [
     { 

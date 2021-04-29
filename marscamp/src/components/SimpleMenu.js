@@ -10,6 +10,8 @@ export default function SimpleMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
   const {token,setToken} = useToken();
   const history = useHistory();
+  const tokenString = localStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
@@ -28,7 +30,7 @@ export default function SimpleMenu() {
   return (
     <div>
       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        Mario
+        {userToken[0].first_and_last_name}
       </Button>
       <Menu
         id="simple-menu"

@@ -46,14 +46,11 @@ function App() {
             <Route>
               <SignIn setToken={setToken}/>
             </Route>
-          </Switch>
+        </Switch>
       </Router>
     </ThemeProvider>
     )
   }
-  // if(!token){
-  //   return <SignIn setToken={setToken}/>
-  // }
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -61,7 +58,7 @@ function App() {
            <Route path = "/signin">
               <SignIn setToken={setToken}/>
             </Route>
-        <Layout>
+         <Layout>
             <Route exact path="/">
               {token ? <Redirect to="/home"/> : <SignIn setToken={setToken}/>}
             </Route>
@@ -74,16 +71,13 @@ function App() {
             <Route path = "/forum">
               <ForumPost/>
             </Route>
-            <Route>
-              <Home/>
+            <Route path="/post">
+              <CreatePost/>
             </Route>
-            </Layout>
-          </Switch>
-      
-    </Router>
-
+         </Layout>
+        </Switch>
+      </Router>
     </ThemeProvider>
-    
   );
 }
 

@@ -21,7 +21,7 @@ const useStyles = makeStyles({
       if (note.category === 'expert') {
         return pink[500]
       }
-      return blue[500]
+      return green[500]
     },
   }
 })
@@ -35,19 +35,19 @@ export default function NoteCard({ note, handleDelete }) {
         <CardHeader
           avatar={
             <Avatar className={classes.avatar}>
-              {note.title[0].toUpperCase()}
+              {note.course_title[0].toUpperCase()}
             </Avatar>}
           action={
-            <IconButton onClick={() => handleDelete(note.id)}>
+            <IconButton onClick={() => handleDelete(note.course_id)}>
               <DeleteOutlined />
             </IconButton>
           }
-          title={note.title}
-          subheader={note.category}
+          title={note.course_title}
+          // subheader={note.category}
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary">
-            { note.details }
+            { note.course_desc}
           </Typography>
         </CardContent>
       </Card>

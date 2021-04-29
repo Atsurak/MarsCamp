@@ -24,27 +24,27 @@ export default function CreateCourse() {
   const classes = useStyles();
   const history = useHistory();
   const [title, setTitle] = useState('');
-  const [details, setDetails] = useState('');
+  const [description, setDescription] = useState('');
   const [titleError, setTitleError] = useState(false);
-  const [detailsError, setDetailsError] = useState(false);
-  const [category, setCategory] = useState('beginner');
+  const [descriptionError, setDescriptionError] = useState(false);
+  //const [category, setCategory] = useState('beginner');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setTitleError(false)
-    setDetailsError(false)
+    setDescriptionError(false)
 
     if (title === '') {
       setTitleError(true)
     }
-    if (details === '') {
-      setDetailsError(true)
+    if (description === '') {
+      setDescriptionError(true)
     }
-    if (title && details) {
-      fetch('http://localhost:8000/courses', {
+    if (title && description) {
+      fetch('http://localhost:5000/courses/add', {
         method: 'POST',
         headers: {"Content-type": "application/json"},
-        body: JSON.stringify({ title, details, category })
+        body: JSON.stringify({ title, description})
       }).then(() => history.push('/'))
     } 
   }
@@ -71,7 +71,7 @@ export default function CreateCourse() {
           error={titleError}
         />
         <TextField className={classes.field}
-          onChange={(e) => setDetails(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
           label="Course Description"
           variant="outlined"
           color="secondary"
@@ -79,13 +79,13 @@ export default function CreateCourse() {
           rows={4}
           fullWidth
           required
-          error={detailsError}
+          error={descriptionError}
         />
 
         {/* <Radio value="hello" />
         <Radio value="goodbye" /> */}
 
-        <FormControl className={classes.field}>
+        {/* <FormControl className={classes.field}>
           <FormLabel>Course Category</FormLabel>
           <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
             <FormControlLabel value="beginner" control={<Radio />} label="Beginner" />
@@ -93,7 +93,7 @@ export default function CreateCourse() {
             <FormControlLabel value="advanced" control={<Radio />} label="Advanced" />
             <FormControlLabel value="expert" control={<Radio />} label="Expert" />
           </RadioGroup>
-        </FormControl>
+        </FormControl> */}
 
         <Button
           type="submit" 
