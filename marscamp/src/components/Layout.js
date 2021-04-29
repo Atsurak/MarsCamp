@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Avatar, Drawer, Toolbar, Typography, AppBar, Link } from '@material-ui/core';
-import { List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
-import { AddCircleOutlineOutlined, ForumOutlined, SubjectOutlined } from '@material-ui/icons'
-import { useHistory, useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 import SimpleMenu from './SimpleMenu';
+import { blue } from '@material-ui/core/colors';
+import SideLinks from './SideLinks';
 
 const drawerWidth = 240
 
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme) => {
       width: drawerWidth,
     },
     active: {
-      background: '#f4f4f4'
+      background: '#f4f4f4',
     },
     title: {
       padding: theme.spacing(2),
@@ -34,43 +33,23 @@ const useStyles = makeStyles((theme) => {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
-    date: {
+    name: {
       flexGrow: 1
     },
     toolbar: theme.mixins.toolbar,
     avatar: {
-      marginLeft: theme.spacing(2)
+      marginLeft: theme.spacing(2),
+      backgroundColor : blue[800]
+    },
+    hidden:{
+      display : 'none'
     }
   }
 })
 
 export default function Layout({ children }) {
   const classes = useStyles();
-  const history = useHistory();
-  const location = useLocation();
-
-  const menuItems = [
-    { 
-      text: 'Courses', 
-      icon: <SubjectOutlined color="secondary" />, 
-      path: '/' 
-    },
-    { 
-      text: 'Create Course', 
-      icon: <AddCircleOutlineOutlined color="secondary" />, 
-      path: '/create' 
-    },
-    {
-      text : 'Create Post',
-      icon : <AddCircleOutlineOutlined color="secondary" />,
-      path : '/post'
-    },
-    {
-      text : 'Forum',
-      icon : <ForumOutlined color="secondary" />,
-      path : '/forum'
-    }
-  ];
+  const userToken = JSON.parse(localStorage.getItem('token'))[0];
 
   return (
     <div className={classes.root}>
@@ -82,14 +61,13 @@ export default function Layout({ children }) {
         color="primary"
       >
         <Toolbar>
-          <Typography className={classes.date}>
-            Today is the {format(new Date(), 'do MMMM Y')}
+          <Typography className={classes.name}>
+            Hey! {userToken.first_and_last_name}, Welcome to Mars Camp!
           </Typography>
-          <Typography><SimpleMenu/></Typography>
-          <Avatar className={classes.avatar} src="/mario-av.png" alt = "M" />
+          <Typography>{format(new Date(), 'do MMMM Y')}</Typography>
+          <Avatar className={classes.avatar}><SimpleMenu/></Avatar>
         </Toolbar>
       </AppBar>
-
       {/* side drawer */}
       <Drawer
         className={classes.drawer}
@@ -102,24 +80,9 @@ export default function Layout({ children }) {
             <Link href="/" color="inherit" underline="none">Mars Camp</Link>
           </Typography>
         </div>
-
         {/* links/list section */}
-        <List>
-          {menuItems.map((item) => (
-            <ListItem 
-              button 
-              key={item.text} 
-              onClick={() => history.push(item.path)}
-              className={location.pathname == item.path ? classes.active : null}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItem>
-          ))}
-        </List>
-        
+        <SideLinks/>
       </Drawer>
-
       {/* main content */}
       <div className={classes.page}>
         <div className={classes.toolbar}></div>

@@ -8,6 +8,7 @@ import DeleteOutlined from '@material-ui/icons/DeleteOutlined'
 import { makeStyles } from '@material-ui/core'
 import Avatar from '@material-ui/core/Avatar'
 import { yellow, green, pink, blue } from '@material-ui/core/colors'
+import Action from './Action'
 
 const useStyles = makeStyles({
   avatar: {
@@ -27,7 +28,11 @@ const useStyles = makeStyles({
 })
 
 export default function NoteCard({ note, handleDelete }) {
-  const classes = useStyles(note)
+  const classes = useStyles(note);
+  const userToken = JSON.parse(localStorage.getItem('token'))[0];
+  const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+
+  console.log(utype);
 
   return (
     <div>
@@ -38,9 +43,7 @@ export default function NoteCard({ note, handleDelete }) {
               {note.course_title[0].toUpperCase()}
             </Avatar>}
           action={
-            <IconButton onClick={() => handleDelete(note.course_id)}>
-              <DeleteOutlined />
-            </IconButton>
+            <Action utype={utype} note={note}/>
           }
           title={note.course_title}
           // subheader={note.category}

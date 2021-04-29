@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import {Button, Menu, MenuItem} from '@material-ui/core';
 import { useHistory } from 'react-router';
-import SignIn from '../pages/SignIn';
-import useToken from './useToken';
 
 export default function SimpleMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
-  const {token,setToken} = useToken();
   const history = useHistory();
-  const tokenString = localStorage.getItem('token');
-  const userToken = JSON.parse(tokenString);
+  const userToken = JSON.parse(localStorage.getItem('token'));
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
@@ -29,8 +23,8 @@ export default function SimpleMenu() {
 
   return (
     <div>
-      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        {userToken[0].first_and_last_name}
+      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} color="primary">
+        {userToken[0].first_and_last_name[0]}
       </Button>
       <Menu
         id="simple-menu"

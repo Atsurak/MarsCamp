@@ -3,11 +3,12 @@ import Container from '@material-ui/core/Container'
 import Masonry from 'react-masonry-css'
 import NoteCard from '../components/NoteCard'
 
-export default function Home() {
+export default function Course(id){
   const [course, setCourse] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:8000/courses'+id)
+    const req = 'http://localhost:5000/courses/get' + id;
+    fetch(req)
       .then(res => res.json())
       .then(data => setNotes(data))
   }, [])

@@ -31,6 +31,9 @@ const theme = createMuiTheme({
 
 function App() {
 
+  const userToken = JSON.parse(localStorage.getItem('token'))[0];
+  const utype = userToken.user_type === 'STUDENT'? 0 : 1;
+
   const {token,setToken} = useToken();
   if(!token) {
     return (
