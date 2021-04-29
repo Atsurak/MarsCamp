@@ -9,13 +9,13 @@ router.get('/login', (req, res) => {
     pool.getConnection(function (error, mclient){
         if(error){
             console.log(error)
-            res.status(400)
+            res.status(400).send('CONN_ERR')
         }
         var sql = 'SELECT email, pwd, user_type FROM users WHERE email = ?'
         mclient.query(sql, [email], async function(err, result){
             if (err){
                 console.log(err)
-                res.status(400)
+                res.status(400).send('MYSQL_ERR')
             }
             else if(result.length!=0){
                 if(await (bcrypt.compare(pwd, result[0].pwd))){
@@ -42,6 +42,7 @@ router.get('/login', (req, res) => {
                 res.send("USER_NOT_FOUND")
             }
         })
+        mclient.release()
     })
 })
 
@@ -54,27 +55,18 @@ router.post('/signup', async (req, res) => {
     pool.getConnection( function(error, mclient) {
         if (error){
             console.log(error)
-            res.status(400)
+            res.status(400).send('CONN_ERR')
         }
         var sql = `INSERT INTO users (registration_no, phone_no, email, first_and_last_name, user_type, pwd) VALUES (\"${reg_no}\", \"${ph_no}\", \"${email}\", \"${name}\", \"${user_type}\", \"${pwd_hashed}\")`
             mclient.query(sql, function (err, result) {
                 if (err){
                     console.log(err)
+                    res.status(400).send('MYSQL_ERR')
                 }
                 else if(!err){
-                console.log(result)
-                if(user_type==='FACULTY'){
-                    sql = `INSERT INTO instructor (approval, user_id) VALUES (false, \"${reg_no}\")`
-                    mclient.query(sql, (err, result) => {
-                        if (err){
-                            console.log(err)
-                        }
-                        else
-                        console.log(result)
-                    })
-                } else if(user_type==='STUDENT'){
-                    for (const course of courses){
-                        sql = `INSERT INTO student (user_id, course_id) VALUES (\"${reg_no}\", ${course})`
+                    console.log(result)
+                    if(user_type==='FACULTY'){
+                        sql = `INSERT INTO instructor (approval, user_id) VALUES (false, \"${reg_no}\")`
                         mclient.query(sql, (err, result) => {
                             if (err){
                                 console.log(err)
@@ -83,7 +75,8 @@ router.post('/signup', async (req, res) => {
                             console.log(result)
                         })
                     }
-                }}
+                    res.status(200).send('OK')
+                }
             })
         mclient.release()
     })
@@ -91,4 +84,4 @@ router.post('/signup', async (req, res) => {
 
 module.exports = router
 
-// await fetch('http://localhost:5000/auth/signup', {method: 'POST', headers: { 'Content-Type': 'application/json'}, body: JSON.stringify({reg_no: , ph_no: , email: , name: , user_type: , pwd: })})
+// await fetch('http://localhost:5000/auth/signup', {method: 'POST', headers: { 'Content-Type': 'application/json'}, body: JSON.stringify({reg_no: , ph_no: , email: , name: , user_type: , pwd: , courses: (array for student only)})})
