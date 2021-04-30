@@ -5,6 +5,7 @@ import NoteCard from '../components/NoteCard'
 
 export default function Course(id){
   const [course, setCourse] = useState('');
+  const [notes, setNotes] = useState([]);
 
   useEffect(() => {
     const req = 'http://localhost:5000/courses/get' + id;

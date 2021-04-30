@@ -11,7 +11,8 @@ import Layout from './components/Layout'
 import CreateCourse from './forms/CreateCourse'
 import CreatePost from './forms/CreatePost'
 import { blue } from '@material-ui/core/colors'
-import ForumPost from './forms/ForumPost'
+import ForumPost from './forms/ForumPost';
+import Course from './pages/Course';
 
 const theme = createMuiTheme({
   palette: {
@@ -30,11 +31,11 @@ const theme = createMuiTheme({
 })
 
 function App() {
-
-  const userToken = JSON.parse(localStorage.getItem('token'))[0];
-  const utype = userToken.user_type === 'STUDENT'? 0 : 1;
-
   const {token,setToken} = useToken();
+  if(token){
+    const userToken = JSON.parse(localStorage.getItem('token'))[0];
+    const utype = userToken.user_type === 'STUDENT'? 0 : 1;
+  }
   if(!token) {
     return (
       <ThemeProvider theme={theme}>
@@ -76,6 +77,9 @@ function App() {
             </Route>
             <Route path="/post">
               <CreatePost/>
+            </Route>
+            <Route path="/course">
+              <Course/>
             </Route>
          </Layout>
         </Switch>

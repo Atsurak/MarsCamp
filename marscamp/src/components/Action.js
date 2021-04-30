@@ -5,10 +5,11 @@ import { IconButton, Button } from '@material-ui/core';
 export default function Action({utype,note}){
 
     const userToken = JSON.parse(localStorage.getItem('token'))[0];
+    const userCourses = JSON.parse(localStorage.getItem('token'))[1];
+    console.log(userToken,userCourses);
 
-    const [msg,setMsg]=useState('Enroll');
 
-
+    const [msg,setMsg]=useState(userCourses.includes(note.course_id)?'Enrolled':'Enroll');
     const handleApply = () => {
 
     }
@@ -22,6 +23,7 @@ export default function Action({utype,note}){
             body: JSON.stringify({ course, student})
         })
         if(msg==='Enroll') setMsg('Enrolled')
+        
     }
 
     const handleDelete = () =>{

@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core'
 import Avatar from '@material-ui/core/Avatar'
 import { yellow, green, pink, blue } from '@material-ui/core/colors'
 import Action from './Action'
+import { Link, useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles({
   avatar: {
@@ -29,10 +30,9 @@ const useStyles = makeStyles({
 
 export default function NoteCard({ note, handleDelete }) {
   const classes = useStyles(note);
+  const history = useHistory();
   const userToken = JSON.parse(localStorage.getItem('token'))[0];
   const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
-
-  console.log(utype);
 
   return (
     <div>
@@ -48,8 +48,8 @@ export default function NoteCard({ note, handleDelete }) {
           title={note.course_title}
           // subheader={note.category}
         />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary">
+        <CardContent onClick={()=>{history.push('/course')}}>
+            <Typography variant="body2" color="textSecondary">
             { note.course_desc}
           </Typography>
         </CardContent>
