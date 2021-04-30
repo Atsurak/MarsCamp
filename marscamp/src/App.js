@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom'
+//import { useState } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import useToken from './components/useToken'
 import Home from './pages/Home'
-import Settings from './pages/Settings'
+//import Settings from './pages/Settings'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import {Redirect} from 'react-router-dom'
@@ -10,9 +10,12 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 import Layout from './components/Layout'
 import CreateCourse from './forms/CreateCourse'
 import CreatePost from './forms/CreatePost'
-import { blue } from '@material-ui/core/colors'
-import ForumPost from './forms/ForumPost';
+import { blue } from '@material-ui/core/colors';
 import Course from './pages/Course';
+import Applications from './pages/Applications'
+import Forum from './pages/Forum'
+import Feedback from './forms/Feedback'
+import Reviews from './pages/Reviews'
 
 const theme = createMuiTheme({
   palette: {
@@ -33,8 +36,8 @@ const theme = createMuiTheme({
 function App() {
   const {token,setToken} = useToken();
   if(token){
-    const userToken = JSON.parse(localStorage.getItem('token'))[0];
-    const utype = userToken.user_type === 'STUDENT'? 0 : 1;
+    //const userToken = JSON.parse(localStorage.getItem('token'))[0];
+    //const utype = userToken.user_type === 'STUDENT'? 0 : 1;
   }
   if(!token) {
     return (
@@ -55,6 +58,7 @@ function App() {
     </ThemeProvider>
     )
   }
+  else{
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -73,7 +77,7 @@ function App() {
               <CreateCourse/>
             </Route>
             <Route path = "/forum">
-              <ForumPost/>
+              <Forum/>
             </Route>
             <Route path="/post">
               <CreatePost/>
@@ -81,11 +85,21 @@ function App() {
             <Route path="/course">
               <Course/>
             </Route>
+            <Route path="/applications">
+              <Applications/>
+            </Route>
+            <Route path="/feedback">
+              <Feedback/>
+            </Route>
+            <Route path ="/reviews">
+              <Reviews/>
+            </Route>
          </Layout>
         </Switch>
       </Router>
     </ThemeProvider>
   );
+  }
 }
 
 export default App;

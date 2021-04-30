@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import SimpleMenu from './SimpleMenu';
 import { blue } from '@material-ui/core/colors';
 import SideLinks from './SideLinks';
+import useToken from './useToken';
 
 const drawerWidth = 240
 
@@ -49,7 +50,12 @@ const useStyles = makeStyles((theme) => {
 
 export default function Layout({ children }) {
   const classes = useStyles();
-  const userToken = JSON.parse(localStorage.getItem('token'))[0];
+  const {token,setToken} = useToken();
+  let userToken = {};
+  if(token){
+    userToken = JSON.parse(localStorage.getItem('token'))[0];
+  }
+  
 
   return (
     <div className={classes.root}>

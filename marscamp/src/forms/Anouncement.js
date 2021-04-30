@@ -1,10 +1,6 @@
-import React, { useState } from 'react'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
-import { makeStyles } from '@material-ui/core'
-import TextField from '@material-ui/core/TextField'
-
+import React, { useState } from 'react';
+import {Typography, TextField, Button, makeStyles} from '@material-ui/core';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles({
@@ -22,15 +18,19 @@ export default function Announcement() {
   const [details, setDetails] = useState('');
   const [titleError, setTitleError] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
-  const [category, setCategory] = useState('beginner');
   const type = 'announcement';
   const timeStamp = new Date();
-  console.log(timeStamp);
+  const userToken = JSON.parse(localStorage.getItem('token'))[0];
+  const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+  const course_id = userToken.course_id;
+  const user_id = userToken.registration_no;
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setTitleError(false)
     setDetailsError(false)
+
+    const content = details;
 
     if (title === '') {
       setTitleError(true)
@@ -39,10 +39,10 @@ export default function Announcement() {
       setDetailsError(true)
     }
     if (title && details) {
-      fetch('http://localhost:8000/posts', {
+      fetch('http://localhost:5000/content/add', {
         method: 'POST',
         headers: {"Content-type": "application/json"},
-        body: JSON.stringify({ title, details, type, timeStamp})
+        body: JSON.stringify({ title, content, user_id, course_id, type})
       }).then(() => history.push('/'))
     } 
   }
@@ -88,8 +88,6 @@ export default function Announcement() {
           Post
         </Button>
       </form>
-
-      
     </div>
   )
 }

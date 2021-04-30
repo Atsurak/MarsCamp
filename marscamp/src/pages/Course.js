@@ -2,13 +2,22 @@ import React, { useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container'
 import Masonry from 'react-masonry-css'
 import NoteCard from '../components/NoteCard'
+import PostCard from '../cards/PostCard';
 
-export default function Course(id){
+export default function Course(){
   const [course, setCourse] = useState('');
   const [notes, setNotes] = useState([]);
 
+  const userToken = JSON.parse(localStorage.getItem('token'))[0];
+  const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+
+  // if(utype===1){
+  //   setCourse(userToken.course_id);
+  // }
+
+
   useEffect(() => {
-    const req = 'http://localhost:5000/courses/get' + id;
+    const req = 'http://localhost:5000/content/get/1';
     fetch(req)
       .then(res => res.json())
       .then(data => setNotes(data))
@@ -35,8 +44,8 @@ export default function Course(id){
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column">
         {notes.map(note => (
-          <div key={note.id}>
-            <NoteCard note={note} handleDelete={handleDelete} />
+          <div key={note.content_id}>
+            <PostCard note={note} handleDelete={handleDelete} />
           </div>
         ))}
       </Masonry>

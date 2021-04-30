@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, makeStyles} from '@material-ui/core';
 import { AddCircleOutlineOutlined, ForumOutlined, SubjectOutlined} from '@material-ui/icons';
 import AddIcon from '@material-ui/icons/Add';
+import ClassIcon from '@material-ui/icons/Class';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 import { useHistory, useLocation } from 'react-router';
 const useStyles = makeStyles(() => {
   return {
@@ -10,73 +12,74 @@ const useStyles = makeStyles(() => {
     }
     }
 })
- 
+
 export default function SideLinks(){
     const history = useHistory();
     const location = useLocation();
     const classes = useStyles();
     const userToken = JSON.parse(localStorage.getItem('token'))[0];
-    const utype = userToken.user_type === 'STUDENT'? 0 : 1;
+    const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
     const menuItemsAdmin = [
     { 
       text: 'Courses', 
-      icon: <SubjectOutlined color="secondary" />, 
+      icon: <ClassIcon color="secondary" />, 
       path: '/' ,
-      type: [0,1]
+    },
+    {
+      text: 'Applications',
+      icon: <ForumOutlined color= "secondary"/>,
+      path: '/applications'
     },
     { 
       text: 'Create Course', 
       icon: <AddIcon color="secondary" />, 
       path: '/create' ,
-      type: [1]
     },
     {
       text : 'Create Post',
       icon : <AddCircleOutlineOutlined color="secondary" />,
       path : '/post',
-      type : [0,1]
     },
     {
       text : 'Forum',
       icon : <ForumOutlined color="secondary" />,
       path : '/forum',
-      type : [0,1]
     }
     
     ];
     const menuItemsStudent = [
     { 
       text: 'Courses', 
-      icon: <SubjectOutlined color="secondary" />, 
+      icon: <ClassIcon color="secondary"/>, 
       path: '/' ,
-      type: [0,1]
     },
     {
       text : 'Forum',
       icon : <ForumOutlined color="secondary" />,
       path : '/forum',
-      type : [0,1]
     }
     ];
 
     const menuItemsFaculty = [
         { 
       text: 'Courses', 
-      icon: <SubjectOutlined color="secondary" />, 
+      icon: <ClassIcon color="secondary" />, 
       path: '/' ,
-      type: [0,1]
     },
     {
       text : 'Create Post',
       icon : <AddCircleOutlineOutlined color="secondary" />,
       path : '/post',
-      type : [0,1]
     },
     {
       text : 'Forum',
       icon : <ForumOutlined color="secondary" />,
       path : '/forum',
-      type : [0,1]
+    },
+    {
+      text : 'FeedBack',
+      icon : <FeedbackIcon color="secondary"/>,
+      path : '/reviews'
     }
     ]
   

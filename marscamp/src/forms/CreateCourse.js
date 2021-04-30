@@ -27,7 +27,7 @@ export default function CreateCourse() {
   const [description, setDescription] = useState('');
   const [titleError, setTitleError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
-  //const [category, setCategory] = useState('beginner');
+  const [category, setCategory] = useState('beginner');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,7 +44,7 @@ export default function CreateCourse() {
       fetch('http://localhost:5000/courses/add', {
         method: 'POST',
         headers: {"Content-type": "application/json"},
-        body: JSON.stringify({ title, description})
+        body: JSON.stringify({ title:title, description:description,difficulty:category})
       }).then(() => history.push('/'))
     } 
   }
@@ -82,10 +82,7 @@ export default function CreateCourse() {
           error={descriptionError}
         />
 
-        {/* <Radio value="hello" />
-        <Radio value="goodbye" /> */}
-
-        {/* <FormControl className={classes.field}>
+        <FormControl className={classes.field}>
           <FormLabel>Course Category</FormLabel>
           <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
             <FormControlLabel value="beginner" control={<Radio />} label="Beginner" />
@@ -93,7 +90,7 @@ export default function CreateCourse() {
             <FormControlLabel value="advanced" control={<Radio />} label="Advanced" />
             <FormControlLabel value="expert" control={<Radio />} label="Expert" />
           </RadioGroup>
-        </FormControl> */}
+        </FormControl>
 
         <Button
           type="submit" 
