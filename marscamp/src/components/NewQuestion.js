@@ -24,7 +24,7 @@ export default function NewQuestion(){
     const [optionDError,setOptionDError] = useState(false);
     const [keyError,setKeyError] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(question ===''){
             setQuestionError(true);
@@ -45,10 +45,11 @@ export default function NewQuestion(){
             setKeyError(true);
         }
         if(question&&optionA&&optionB&&optionC&&optionD&&key){
-            fetch('http://localhost:8000/questions',{
+            await fetch('http://localhost:5000/content/add',{
                 method: 'POST',
                 headers: {"Content-type": "application/json"},
-                body: JSON.stringify({question,optionA,optionB,optionC,optionD,key})
+                body: JSON.stringify({user_id: "", course_id: 1, content: "questions", type: "TEST"})
+                //body: JSON.stringify({question,optionA,optionB,optionC,optionD,key})
             }).then((res) => console.log('Question added'))
         }
         

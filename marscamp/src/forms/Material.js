@@ -34,7 +34,7 @@ export default function Material() {
   const timeStamp = new Date();
   console.log(timeStamp);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setTitleError(false)
     setDetailsError(false)
@@ -46,11 +46,11 @@ export default function Material() {
       setDetailsError(true)
     }
     if (title && details) {
-      fetch('http://localhost:8000/material', {
-        method: 'POST',
-        headers: {"Content-type": "application/json"},
-        body: JSON.stringify({ title, details, type, timeStamp})
-      }).then(() => history.push('/'))
+      // await fetch('http://localhost:5000/content/add', {
+      //   method: 'POST',
+      //   headers: {"Content-type": "application/json"},
+      //   body: JSON.stringify({ content, user_id, course_id, type })
+      // }).then(() => history.push('/'))
     } 
   }
 

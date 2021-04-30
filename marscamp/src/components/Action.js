@@ -10,24 +10,37 @@ export default function Action({utype,note}){
 
 
     const [msg,setMsg]=useState(userCourses.includes(note.course_id)?'Enrolled':'Enroll');
-    const handleApply = () => {
-
+    const handleApply = async (id) => {
+      const course_id = id;
+      const user_id = userToken.registration_no;
+        await fetch('http://localhost:5000/instructor/apply', {
+            method: 'POST',
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify({ course_id, user_id})
+        })
+        if(msg==='Enroll') setMsg('Enrolled')
     }
 
     const handleEnroll = async (id) => {
-        const course = id;
-        const student = userToken.registration_no;
+        const course_id = id;
+        const user_id = userToken.registration_no;
         await fetch('http://localhost:5000/student/enroll', {
             method: 'POST',
             headers: {"Content-type": "application/json"},
-            body: JSON.stringify({ course, student})
+            body: JSON.stringify({ course_id, user_id})
         })
         if(msg==='Enroll') setMsg('Enrolled')
         
     }
 
-    const handleDelete = () =>{
-
+    const handleDelete = async (id) =>{
+      const course_id = id;
+        await fetch('http://localhost:5000/courses/delete', {
+            method: 'POST',
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify({ course_id })
+        })
+        if(msg==='Enroll') setMsg('Enrolled')
     }
 
     console.log('my type is' + utype);

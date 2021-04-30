@@ -15,11 +15,13 @@ const coursesRoute = require('./routes/courses')
 const studentRoute = require('./routes/student')
 const instructorRoute = require('./routes/instructor')
 const feedbackRoute = require('./routes/feedback')
+const contentRoute = require('./routes/content')
 
 app.use('/auth', authRoute)
 app.use('/courses', coursesRoute)
 app.use('/student', studentRoute)
 app.use('/instructor',instructorRoute)
 app.use('/feedback',feedbackRoute)
+app.use('/content',contentRoute)
 
 app.listen(5000,()=> console.log('API running on port 5000'))

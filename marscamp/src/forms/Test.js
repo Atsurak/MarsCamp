@@ -29,7 +29,7 @@ export default function Test() {
   
   const update = async() =>{
     console.log('update called')
-    await fetch('http://localhost:8000/questions')
+    await fetch('http://localhost:5000/content/get?course_id=<course id here>&type=TEST')
       .then(res => res.json())
       .then(data => setQuestions(data))
   }
