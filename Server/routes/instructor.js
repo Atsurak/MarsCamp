@@ -93,4 +93,26 @@ router.get('/get/:id', (req, res) => {
     })
 })
 
+router.get('/getunapp', (req, res) => {
+    pool.getConnection(function(error, mclient){
+        if (error){
+            console.log(error)
+            res.status(400).send('CONN_ERR')
+        }
+
+        var sql = `SELECT * FROM instructor WHERE approval = FALSE`
+        mclient.query(sql, function(err, result){
+            if(err){
+                console.log(err)
+                res.status(400).send('MYSQL_ERR')
+            } else {
+                console.log(result)
+                res.json(result)
+            }
+        })
+
+        mclient.release()
+    })
+})
+
 module.exports = router
