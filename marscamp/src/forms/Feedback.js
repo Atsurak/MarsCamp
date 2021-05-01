@@ -1,7 +1,8 @@
-import { Button, Container, makeStyles, Paper, TextField } from '@material-ui/core';
-import { Send, SendOutlined } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import { Send} from '@material-ui/icons';
+import { Button, Container, makeStyles, TextField } from '@material-ui/core';
+
 
 
 const useStyles = makeStyles({
@@ -22,7 +23,7 @@ export default function Feedback(){
     const [details, setDetails] = useState('');
     const [detailsError, setDetailsError] = useState(false);
     let userToken = JSON.parse(localStorage.getItem('token'));
-    const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+    //const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
     let course_id = history.location.state.id;
     const user_id = userToken[0].registration_no;
     

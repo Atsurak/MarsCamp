@@ -48,7 +48,7 @@ export default function NewQuestion(){
             await fetch('http://localhost:5000/content/add',{
                 method: 'POST',
                 headers: {"Content-type": "application/json"},
-                body: JSON.stringify({user_id: "", course_id: 1, content: "questions", type: "TEST"})
+                body: JSON.stringify({user_id: "", course_id: 1, content: "questions", type: "test"})
                 //body: JSON.stringify({question,optionA,optionB,optionC,optionD,key})
             }).then((res) => console.log('Question added'))
         }

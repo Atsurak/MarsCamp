@@ -1,5 +1,5 @@
 import { Button, Container, makeStyles, Paper, TextField } from '@material-ui/core';
-import { Send, SendOutlined } from '@material-ui/icons';
+import { Send} from '@material-ui/icons';
 import React, { useState } from 'react';
 
 
@@ -22,7 +22,7 @@ export default function ForumPost({forum}){
     const [titleError, setTitleError] = useState(false);
     const [detailsError, setDetailsError] = useState(false);
     let userToken = JSON.parse(localStorage.getItem('token'));
-    const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+    //const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
     let course_id = forum;
     const user_id = userToken[0].registration_no;
     const type = 'forum';
@@ -47,6 +47,9 @@ export default function ForumPost({forum}){
         method: 'POST',
         headers: {"Content-type": "application/json"},
         body: JSON.stringify({ title, content, user_id, course_id, type})
+      }).then(()=>{
+        setTitle('');
+        setDetails('');
       })
     } 
   }

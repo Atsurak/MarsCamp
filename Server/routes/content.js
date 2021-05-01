@@ -4,15 +4,15 @@ const mysql = require('mysql')
 const pool = require('../scripts/mysql')
 
 router.post('/add', (req, res) => {
-    const { title, content, user_id, course_id, type } = req.body
+    const { content, user_id, course_id, type } = req.body
     pool.getConnection(function(error, mclient){
         if (error){
             console.log(error)
             res.status(400).send('CONN_ERR')
         }
 
-        var sql = `INSERT INTO course_content (title, content, user_id, course_id, content_type) VALUES (?, ?, ?, ?, ?)`
-        mclient.query(sql, [title, content, user_id, course_id, type], function(err, result){
+        var sql = `INSERT INTO course_content (content, user_id, course_id, content_type) VALUES (?, ?, ?, ?)`
+        mclient.query(sql, [content, user_id, course_id, type], function(err, result){
             if(err){
                 console.log(err)
                 res.status(400).send('MYSQL_ERR')
@@ -27,7 +27,7 @@ router.post('/add', (req, res) => {
 })
 
 router.get('/get/:id', (req, res) => {
-    course_id = req.params.id
+    let course_id = req.params.id
     pool.getConnection(function(error, mclient){
         if (error){
             console.log(error)

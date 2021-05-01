@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, Avatar, Drawer, Toolbar, Typography, AppBar, Link } from '@material-ui/core';
 import { format } from 'date-fns';
 import SimpleMenu from './SimpleMenu';
@@ -81,12 +81,14 @@ export default function Layout({ children }) {
         classes={{ paper: classes.drawerPaper }}
         anchor="left"
       >
-        <div>
-          <Typography variant="h5" className={classes.title}>
-            <Link href="/" color="inherit" underline="none">Mars Camp</Link>
+        <div className={classes.title}>
+          <Typography variant="h5" display="inline" >
+            
+            <Link href="/" color="inherit" underline="none">
+             Mars Camp </Link>
           </Typography>
         </div>
-        {/* links/list section */}
+        {/* links/list section <Avatar className={classes.logo} src="./mars.png"/>*/}
         <SideLinks/>
       </Drawer>
       {/* main content */}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {DeleteOutlined} from '@material-ui/icons';
-import { IconButton, Button } from '@material-ui/core';
+import {Button } from '@material-ui/core';
  
 export default function Faculty({utype,note}){
 
