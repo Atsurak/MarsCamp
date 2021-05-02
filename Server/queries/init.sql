@@ -53,6 +53,17 @@ CREATE TABLE course_content (
     PRIMARY KEY (content_id)
 );
 
+CREATE TABLE questions (
+	question_id INT NOT NULL AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    content_id INT NOT NULL,
+    question VARCHAR (500) NOT NULL,
+    choices VARCHAR (1000) NOT NULL,
+    CONSTRAINT fk_que_content FOREIGN KEY (content_id) REFERENCES course_content(content_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_que_course FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY(question_id)
+);
+
 ALTER TABLE student ADD student_id INT NOT NULL;
 ALTER TABLE student ADD PRIMARY KEY (student_id);
 ALTER TABLE student
@@ -73,6 +84,7 @@ ALTER TABLE courses ADD difficulty VARCHAR(30) NOT NULL;
 ALTER TABLE course_content ADD content_type VARCHAR(15) NOT NULL;
 ALTER TABLE course_content ADD title VARCHAR(50) NOT NULL;
 
+SELECT LAST_INSERT_ID(content_id) From course_content;
 
 DESCRIBE users;
 DESCRIBE courses;
