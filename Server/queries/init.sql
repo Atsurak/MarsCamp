@@ -64,6 +64,12 @@ CREATE TABLE questions (
     PRIMARY KEY(question_id)
 );
 
+CREATE TABLE filetest (
+	id INT NOT NULL AUTO_INCREMENT,
+    file_route VARCHAR(500) NOT NULL,
+    PRIMARY KEY(id)
+);
+
 ALTER TABLE student ADD student_id INT NOT NULL;
 ALTER TABLE student ADD PRIMARY KEY (student_id);
 ALTER TABLE student
@@ -83,6 +89,7 @@ ALTER TABLE instructor ADD FOREIGN KEY (course_id) REFERENCES courses (course_id
 ALTER TABLE courses ADD difficulty VARCHAR(30) NOT NULL;
 ALTER TABLE course_content ADD content_type VARCHAR(15) NOT NULL;
 ALTER TABLE course_content ADD title VARCHAR(50) NOT NULL;
+ALTER TABLE course_content ADD file_path VARCHAR(255) DEFAULT NULL;
 
 SELECT LAST_INSERT_ID(content_id) From course_content;
 
