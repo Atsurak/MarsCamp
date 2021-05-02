@@ -67,6 +67,12 @@ ALTER TABLE users MODIFY COLUMN pwd VARCHAR(100) NOT NULL;
 ALTER TABLE student MODIFY COLUMN course_id INT;
 ALTER TABLE users ADD CONSTRAINT email_const UNIQUE (email);
 ALTER TABLE student ADD CONSTRAINT student_const UNIQUE (user_id, course_id);
+ALTER TABLE instructor DROP FOREIGN KEY fk_inst_course;
+ALTER TABLE instructor ADD FOREIGN KEY (course_id) REFERENCES courses (course_id) ON DELETE SET NULL;
+ALTER TABLE courses ADD difficulty VARCHAR(30) NOT NULL;
+ALTER TABLE course_content ADD content_type VARCHAR(15) NOT NULL;
+ALTER TABLE course_content ADD title VARCHAR(50) NOT NULL;
+
 
 DESCRIBE users;
 DESCRIBE courses;

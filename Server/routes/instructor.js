@@ -11,7 +11,7 @@ router.post('/subject', (req, res) => {
             res.status(400).send('CONN_ERR')
         }
 
-        var sql = `UPDATE instructor SET course_id = ? WHERE user_id = ?`
+        var sql = `UPDATE instructor SET course_id = ? approval = FALSE WHERE user_id = ?`
         mclient.query(sql, [course_id, user_id], function(err, result){
             if(err){
                 console.log(err)
@@ -100,7 +100,7 @@ router.get('/getunapp', (req, res) => {
             res.status(400).send('CONN_ERR')
         }
 
-        var sql = `SELECT * FROM instructor WHERE approval = FALSE`
+        var sql = `SELECT instructor.approval, instructor.user_id, instructor.course_id, instructor.faculty_id, users.first_and_last_name, courses.course_title, courses.course_desc, courses.difficulty FROM instructor INNER JOIN users ON instructor.user_id = users.registration_no INNER JOIN courses ON instructor.course_id = courses.course_id WHERE instructor.approval = FALSE`
         mclient.query(sql, function(err, result){
             if(err){
                 console.log(err)
