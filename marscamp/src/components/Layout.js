@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, Avatar, Drawer, Toolbar, Typography, AppBar, Link } from '@material-ui/core';
 import { format } from 'date-fns';
 import SimpleMenu from './SimpleMenu';
 import { blue } from '@material-ui/core/colors';
 import SideLinks from './SideLinks';
+import useToken from './useToken';
 
 const drawerWidth = 240
 
@@ -49,7 +50,12 @@ const useStyles = makeStyles((theme) => {
 
 export default function Layout({ children }) {
   const classes = useStyles();
-  const userToken = JSON.parse(localStorage.getItem('token'))[0];
+  const {token,setToken} = useToken();
+  let userToken = {};
+  if(token){
+    userToken = JSON.parse(localStorage.getItem('token'))[0];
+  }
+  
 
   return (
     <div className={classes.root}>
@@ -75,12 +81,14 @@ export default function Layout({ children }) {
         classes={{ paper: classes.drawerPaper }}
         anchor="left"
       >
-        <div>
-          <Typography variant="h5" className={classes.title}>
-            <Link href="/" color="inherit" underline="none">Mars Camp</Link>
+        <div className={classes.title}>
+          <Typography variant="h5" display="inline" >
+            
+            <Link href="/" color="inherit" underline="none">
+             Mars Camp </Link>
           </Typography>
         </div>
-        {/* links/list section */}
+        {/* links/list section <Avatar className={classes.logo} src="./mars.png"/>*/}
         <SideLinks/>
       </Drawer>
       {/* main content */}

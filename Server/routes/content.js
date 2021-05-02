@@ -27,7 +27,7 @@ router.post('/add', (req, res) => {
 })
 
 router.get('/get/:id', (req, res) => {
-    course_id = req.params.id
+    let course_id = req.params.id
     pool.getConnection(function(error, mclient){
         if (error){
             console.log(error)
