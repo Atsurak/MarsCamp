@@ -28,6 +28,9 @@ export default function Course(){
   if(history.location.state!=undefined){
     id = history.location.state.id;
   }
+  if(utype===1){
+    id=userToken.course_id;
+  }
 
   useEffect(() => {
     const req = 'http://localhost:5000/content/get/'+id;

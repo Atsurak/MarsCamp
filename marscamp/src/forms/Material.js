@@ -28,16 +28,22 @@ export default function Material() {
   const history = useHistory();
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
+  const [file_path, setFilepath] = useState('');
+
   const [titleError, setTitleError] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
   const type = 'material';
-  const timeStamp = new Date();
-  console.log(timeStamp);
+  const userToken = JSON.parse(localStorage.getItem('token'))[0];
+  const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+  const course_id = userToken.course_id;
+  const user_id = userToken.registration_no;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setTitleError(false)
     setDetailsError(false)
+    console.log(file_path);
+    file_path.substring(12);
 
     if (title === '') {
       setTitleError(true)
@@ -46,11 +52,11 @@ export default function Material() {
       setDetailsError(true)
     }
     if (title && details) {
-      // await fetch('http://localhost:5000/content/add', {
-      //   method: 'POST',
-      //   headers: {"Content-type": "application/json"},
-      //   body: JSON.stringify({ content, user_id, course_id, type })
-      // }).then(() => history.push('/'))
+      fetch('http://localhost:5000/content/add', {
+         method: 'POST',
+         headers: {"Content-type": "application/json"},
+         body: JSON.stringify({ content : details, user_id, course_id,title, type, file_path })
+      })
     } 
   }
 
@@ -89,11 +95,12 @@ export default function Material() {
         />
 
         <input
-        accept="image/*"
+        accept="application/zip"
         className={classes.input}
         id="contained-button-file"
         multiple
         type="file"
+        onChange={(e) => setFilepath(e.target.value)}
         />
        <label htmlFor="contained-button-file">
         <Button

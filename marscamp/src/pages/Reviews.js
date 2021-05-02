@@ -43,7 +43,7 @@ export default function Reviews(){
                    variant="body2"
                    className={classes.inline}
                     >{review.content} </Typography>
-                    - {formatDistanceToNowStrict(parseInt(review.date_and_time))} ago
+                    - {formatDistanceToNowStrict(new Date(review.date_and_time),{addSuffix : true})}
                   </span>
                 }
               />

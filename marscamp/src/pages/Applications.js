@@ -52,7 +52,7 @@ export default function Applications() {
                   <ListItem>
                       <ListItemText primary={user.first_and_last_name} secondary={user.user_id}/>
                       <ListItemText primary={user.course_title}/>
-                      <Button color="secondary" onClick={handleApprove(user.user_id)}>Approve</Button>
+                      <Button color="secondary"onClick={()=>{handleApprove(user.user_id)}} >Approve</Button>
                       <Button>Delete</Button>
                   </ListItem>
                   <div>

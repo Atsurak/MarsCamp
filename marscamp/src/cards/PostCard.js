@@ -47,7 +47,8 @@ export default function PostCard({ note, handleDelete }) {
         />
         <CardContent onClick={()=>{history.push('/course')}}>
             <Typography variant="body2" color="textSecondary">
-            { note.content}
+            { note.content} 
+            {note.file_path?<a href={"../../public/Server/"+note.file_path.substring(12)} download >File</a>: null}
           </Typography>
         </CardContent>
       </Card>

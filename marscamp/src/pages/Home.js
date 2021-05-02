@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container'
 import Masonry from 'react-masonry-css'
 import NoteCard from '../components/NoteCard'
+import { useHistory } from 'react-router';
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
+  const userToken = JSON.parse(localStorage.getItem('token'))[0];
+  const utype = userToken.user_type === 'STUDENT'? 0 : 1;
+  const history = useHistory();
 
   useEffect(() => {
     fetch('http://localhost:5000/courses/get')
@@ -25,6 +29,9 @@ export default function Home() {
     1100: 2,
     700: 1
   };
+  if(utype===1&&userToken.course_id){
+    history.push('/course');
+  }
 
   return (
     <Container>

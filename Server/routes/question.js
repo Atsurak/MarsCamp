@@ -20,18 +20,20 @@ router.post('/add', (req, res) => {
             } else {
                 content_id = result[result.length-1]['LAST_INSERT_ID(content_id)']
             }
-        })
-
-        var sql = `INSERT INTO questions (question, choices, course_id, content_id) VALUES (?, ?, ?, ?)`
-        mclient.query(sql, [question, choices, course_id, content_id], function(err, result){
-            if(err){
-                console.log(err)
+            var sql = `INSERT INTO questions (question, choices, course_id, content_id) VALUES (?, ?, ?, ?)`
+            mclient.query(sql, [question, choices, course_id, content_id], function(err2, result2){
+            if(err2){
+                console.log(err2)
                 res.status(400).send('MYSQL_ERR')
             } else {
-                console.log(result)
+                console.log(result2)
                 res.status(200).send('OK')
             }
         })
+        })
+        console.log(content_id);
+
+        
 
         mclient.release()
     })
@@ -44,7 +46,7 @@ router.get('/get/:id', (req, res) => {
             res.status(400).send('CONN_ERR')
         }
 
-        var sql = `SELECT * FROM instructor WHERE content_id = ?`
+        var sql = `SELECT * FROM questions WHERE course_id = ?`
         mclient.query(sql, [req.params.id], function(err, result){
             if(err){
                 console.log(err)

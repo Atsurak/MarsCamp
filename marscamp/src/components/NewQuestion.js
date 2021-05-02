@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     }
 })
  
-export default function NewQuestion(){
+export default function NewQuestion(update){
     const classes = useStyles();
     const [question,setQuestion] = useState();
     const [optionA,setOptionA] = useState();
@@ -23,9 +23,16 @@ export default function NewQuestion(){
     const [optionCError,setOptionCError] = useState(false);
     const [optionDError,setOptionDError] = useState(false);
     const [keyError,setKeyError] = useState(false);
+    const userToken = JSON.parse(localStorage.getItem('token'))[0];
+    const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+    const course_id = userToken.course_id;
+    const user_id = userToken.registration_no;
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
+
         e.preventDefault();
+        console.log('meetooo')
+
         if(question ===''){
             setQuestionError(true);
         }
@@ -44,13 +51,15 @@ export default function NewQuestion(){
         if(key === ''){
             setKeyError(true);
         }
+        let choices = optionA + '#' + optionB + '#' + optionC + '#' +optionD + '#'+key ;
+        console.log(question,choices,course_id);
         if(question&&optionA&&optionB&&optionC&&optionD&&key){
-            await fetch('http://localhost:5000/content/add',{
+            fetch('http://localhost:5000/question/add',{
                 method: 'POST',
                 headers: {"Content-type": "application/json"},
-                body: JSON.stringify({user_id: "", course_id: 1, content: "questions", type: "test"})
+                body: JSON.stringify({question, choices, course_id})
                 //body: JSON.stringify({question,optionA,optionB,optionC,optionD,key})
-            }).then((res) => console.log('Question added'))
+            }).then((res) => update)
         }
         
     }

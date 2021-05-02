@@ -11,7 +11,7 @@ router.post('/subject', (req, res) => {
             res.status(400).send('CONN_ERR')
         }
 
-        var sql = `UPDATE instructor SET course_id = ? approval = FALSE WHERE user_id = ?`
+        var sql = `UPDATE instructor SET course_id = ? , approval = FALSE WHERE user_id = ?`
         mclient.query(sql, [course_id, user_id], function(err, result){
             if(err){
                 console.log(err)

@@ -107,7 +107,7 @@ export default function Forum() {
                    variant="body2"
                    className={classes.inline}
                     >{post.content} </Typography>
-                    - {formatDistanceToNowStrict(parseInt(post.date_and_time))} ago
+                    - {formatDistanceToNowStrict(new Date(post.date_and_time),{addSuffix: true})}
                   </span>
                 }/>
                 </ListItem>

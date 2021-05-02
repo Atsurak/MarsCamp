@@ -19,7 +19,6 @@ export default function Announcement() {
   const [titleError, setTitleError] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
   const type = 'announcement';
-  const timeStamp = new Date();
   const userToken = JSON.parse(localStorage.getItem('token'))[0];
   const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
   const course_id = userToken.course_id;
