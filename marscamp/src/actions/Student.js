@@ -39,7 +39,7 @@ export default function Student({utype,note}){
         await fetch('http://localhost:5000/student/enroll', {
             method: 'POST',
             headers: {"Content-type": "application/json"},
-            body: JSON.stringify({ course_id, user_id})
+            body: JSON.stringify({ course: course_id, student : user_id})
         })
         if(msg==='Enroll') setMsg('Enrolled')
     }

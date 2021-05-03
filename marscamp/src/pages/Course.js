@@ -3,13 +3,14 @@ import Container from '@material-ui/core/Container'
 import Masonry from 'react-masonry-css'
 import PostCard from '../cards/PostCard';
 import { useHistory } from 'react-router';
-import { Chip } from '@material-ui/core';
+import { Chip, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
+    paddingBottom : 20,
     '& > *': {
       margin: theme.spacing(0.5),
     },
@@ -37,6 +38,11 @@ export default function Course(){
     fetch(req)
       .then(res => res.json())
       .then(data => setNotes(data))
+
+    fetch('http://localhost:5000/courses/get/' + id)
+     .then(res=>res.json())
+     .then(data=>setCourse(data[0]))
+     console.log(id);
   }, [])
 
   const handleDelete = async (id) => {
@@ -67,6 +73,7 @@ export default function Course(){
 
   return (
     <Container>
+       <Typography variant = "h4" className={classes.root}>{course.course_title}</Typography>
       <div className={classes.root}>
         <Chip
         label="Announcements"

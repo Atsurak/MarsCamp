@@ -4,22 +4,14 @@ const mysql = require('mysql')
 const pool = require('../scripts/mysql')
 
 router.post('/add', (req, res) => {
-    const { question, choices, course_id } = req.body
+    const { question, choices, course_id, content_id } = req.body
     pool.getConnection(function(error, mclient){
         if (error){
             console.log(error)
             res.status(400).send('CONN_ERR')
         }
 
-        var sql = 'SELECT LAST_INSERT_ID(content_id) FROM course_content'
-        var content_id
-        mclient.query(sql, function(err, result){
-            if(err){
-                console.log(err)
-                res.status(400).send('MYSQL_ERR')
-            } else {
-                content_id = result[result.length-1]['LAST_INSERT_ID(content_id)']
-            }
+        
             var sql = `INSERT INTO questions (question, choices, course_id, content_id) VALUES (?, ?, ?, ?)`
             mclient.query(sql, [question, choices, course_id, content_id], function(err2, result2){
             if(err2){
@@ -29,7 +21,7 @@ router.post('/add', (req, res) => {
                 console.log(result2)
                 res.status(200).send('OK')
             }
-        })
+
         })
         console.log(content_id);
 
@@ -46,7 +38,7 @@ router.get('/get/:id', (req, res) => {
             res.status(400).send('CONN_ERR')
         }
 
-        var sql = `SELECT * FROM questions WHERE course_id = ?`
+        var sql = `SELECT * FROM questions WHERE content_id = ?`
         mclient.query(sql, [req.params.id], function(err, result){
             if(err){
                 console.log(err)
