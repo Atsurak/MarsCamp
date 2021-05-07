@@ -21,3 +21,8 @@ body {
 .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
   margin-bottom: 30px;
 }
+a{
+  text-decoration : none;
+  color : #000;
+  /* color : #e91e63; */
+}

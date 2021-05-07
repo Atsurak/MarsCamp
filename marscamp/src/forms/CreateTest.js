@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function Test() {
+export default function CreateTest() {
   const classes = useStyles();
   const [questions,setQuestions] = useState([]);
   const [title, setTitle] = useState('');
@@ -34,7 +34,7 @@ export default function Test() {
   const type = 'test';
   const [tests,setTests] = useState([]);
   const userToken = JSON.parse(localStorage.getItem('token'))[0];
-  const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+  //const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
   const course_id = userToken.course_id;
   const user_id = userToken.registration_no;
   const [contentid,setContent]= useState('');
@@ -88,7 +88,15 @@ export default function Test() {
                 headers: {"Content-type": "application/json"},
                 body: JSON.stringify({question, choices, course_id, content_id})
                 //body: JSON.stringify({question,optionA,optionB,optionC,optionD,key})
-            }).then((res) => update)
+            }).then((res) => update(content_id))
+              .then(()=>{
+                setQuestion('');
+                setOptionA('');
+                setOptionB('');
+                setOptionC('');
+                setOptionD('');
+                setKey('');
+              })
         }
         
     }
@@ -114,7 +122,11 @@ export default function Test() {
         method: 'POST',
         headers: {"Content-type": "application/json"},
         body: JSON.stringify({ title, content, user_id, course_id, type})
-      });
+      }).then(()=>{
+        setTitle('');
+        setDetails('');
+      })
+
     } 
   }
 
@@ -124,7 +136,7 @@ export default function Test() {
     .then(res => res.json())
     .then(data => setTests(data))
 
-  }, [])
+  }, [course_id])
   
   const update = async(id) =>{
     console.log('update called')
@@ -154,7 +166,7 @@ export default function Test() {
                 fullWidth
                 required
                 color="secondary"
-                label = "choose forum"
+                label = "choose test"
             >
                 { tests.map( test=> (
                     <MenuItem key={test.content_id} value={test.content_id} onClick = {()=>{handleChange(test.content_id)}}>{test.title}</MenuItem>

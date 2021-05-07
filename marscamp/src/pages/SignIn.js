@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {makeStyles, Typography, Avatar, Button, CssBaseline, TextField, Checkbox, Link, Grid, Box, Container, FormControlLabel} from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import PropTypes from 'prop-types';
 import Copyright from '../components/Copyright';
 import { useHistory } from 'react-router';
 
 const loginUser = async (credentials) =>{
+  // eslint-disable-next-line
   const req = 'http://localhost:5000/auth/login?'+'email='+credentials.email+'&pwd='+credentials.password ;
   console.log(req);
   return await fetch(req)
@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
+  // avatar: {
+  //   margin: theme.spacing(1),
+  //   backgroundColor: theme.palette.secondary.main,
+  // },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -52,9 +52,9 @@ export default function SignIn({setToken}) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <Avatar src="/mars.png" className={classes.avatar}/>
+          {/* <LockOutlinedIcon /> */}
+        
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>

@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import Container from '@material-ui/core/Container'
-import Masonry from 'react-masonry-css'
-import NoteCard from '../components/NoteCard'
-import { Button, List, ListItem, ListItemText } from '@material-ui/core'
-import { red } from '@material-ui/core/colors'
+import React, { useEffect, useState } from 'react';
+import { Container, Button, List, ListItem, ListItemText } from '@material-ui/core';
 
 export default function Applications() {
-  const [users,setUsers] = useState([]); 
-  const [courses,setCourses]= useState([]);
+  const [users,setUsers] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:5000/instructor/getunapp')
@@ -32,17 +27,8 @@ export default function Applications() {
       headers: {"Content-type": "application/json"},
       body: JSON.stringify({user_id : id})
     })
-    //const newNotes = notes.filter(note => note.id != id)
-    //setNotes(newNotes)
+   
   }
-
-//   const breakpoints = {
-//     default: 3,
-//     1100: 2,
-//     700: 1
-//   };
-  
-
   return (
     <Container>
       <List>

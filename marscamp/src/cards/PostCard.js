@@ -1,15 +1,9 @@
 import React from 'react'
-import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardContent from '@material-ui/core/CardContent'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import DeleteOutlined from '@material-ui/icons/DeleteOutlined'
-import { makeStyles } from '@material-ui/core'
-import Avatar from '@material-ui/core/Avatar'
-import { yellow, green, pink, blue, brown, orange } from '@material-ui/core/colors'
-import Action from '../components/Action'
-import { Link, useHistory } from 'react-router-dom'
+import {makeStyles, Avatar,IconButton, Card, CardHeader, CardContent, Typography, Button} from '@material-ui/core';
+import { yellow, green, pink,orange } from '@material-ui/core/colors';
+import {useHistory} from 'react-router';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const useStyles = makeStyles({
   avatar: {
@@ -25,14 +19,23 @@ const useStyles = makeStyles({
       }
       return orange[500]
     },
+  },
+  link : {
+    color : '#e91e63'
   }
 })
 
 export default function PostCard({ note, handleDelete }) {
   const classes = useStyles(note);
   const history = useHistory();
-  const userToken = JSON.parse(localStorage.getItem('token'))[0];
-  const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+  //const userToken = JSON.parse(localStorage.getItem('token'))[0];
+  //const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+  const handleClick = (id) => {
+    history.push({
+      pathname : '/test',
+      state : {id :id}
+    });
+  }
 
   return (
     <div>
@@ -48,9 +51,31 @@ export default function PostCard({ note, handleDelete }) {
         <CardContent onClick={()=>{history.push('/course')}}>
             <Typography variant="body2" color="textSecondary">
             { note.content} 
-            {note.file_path?<a href={"../../public/Server/"+note.file_path.substring(12)} download >File</a>: null}
+            {note.file_path?<div className={classes.link} color = "secondary"><a href={"/Server/"+note.file_path.substring(12)} download >
+            <IconButton>
+            <ArrowDownwardIcon color="secondary"/>
+            </IconButton> Download
+            </a></div>: null}
+            {/* {note.content_type==='test'?<div>
+              <Button
+              color="secondary"
+              type="button"
+              onClick={()=>{history.push('/forum')}}
+              startIcon={<AssignmentIcon/>}
+              >Take test</Button>
+             {/* <IconButton  onClick={()=>{history.push('/forum')}}>
+            <AssignmentIcon color="secondary"/>
+            </IconButton> Taketest 
+            </div>: null}}*/}
           </Typography>
         </CardContent>
+        {note.content_type==='test'?<Button
+              color="secondary"
+              type="button"
+              startIcon={<AssignmentIcon/>}
+              onClick={()=>{handleClick(note.content_id)}}
+              
+              >Take test</Button>:null}
       </Card>
     </div>
   )

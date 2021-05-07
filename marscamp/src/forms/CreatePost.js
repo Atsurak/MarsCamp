@@ -5,7 +5,7 @@ import { makeStyles, MenuItem } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Announcement from './Anouncement';
 import Material from './Material';
-import Test from './Test';
+import CreateTest from './CreateTest';
 
 const useStyles = makeStyles({
   field: {
@@ -23,14 +23,13 @@ export default function CreatePost(){
   const [type,setType] = useState('announcement');
   const handleChange = (e)=>{
       setType(e.target.value);
-      console.log('option changed to'+`${e.target.value}`);
   }
   const ChangePostType = (type) =>{
       if(type==='announcement'){
           return <Announcement/>
       }
       else if(type==='test'){
-        return <Test/>
+        return <CreateTest/>
       }
       else{
         return <Material/>

@@ -16,7 +16,6 @@ export default function QuestionCard({ question}) {
         />
         <CardContent>
           <Typography variant="body2">
-            <form>
               <FormControl>
                 <FormLabel>Choose Your Option</FormLabel>
               </FormControl>
@@ -26,7 +25,6 @@ export default function QuestionCard({ question}) {
                   <FormControlLabel value="C" control={<Radio />} label={choices[2]} />
                   <FormControlLabel value="D" control={<Radio />} label={choices[3]} />
               </RadioGroup>
-            </form>
           </Typography>
         </CardContent>
       </Card>

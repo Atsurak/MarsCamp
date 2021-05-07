@@ -16,14 +16,14 @@ export default function Reviews(){
     const [reviews, setReviews] = useState([]);
     const userToken = JSON.parse(localStorage.getItem('token'))[0];
     const id = userToken.course_id;
-    const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+    //const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
     const classes = useStyles();
     
   useEffect(() => {
     fetch('http://localhost:5000/feedback/get/'+id)
       .then(res=>res.json())
       .then(data=>setReviews(data))
-  }, [])
+  }, [id])
 
     return(
         <Container>

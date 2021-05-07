@@ -16,6 +16,7 @@ import Applications from './pages/Applications'
 import Forum from './pages/Forum'
 import Feedback from './forms/Feedback'
 import Reviews from './pages/Reviews'
+import Test from './pages/Test'
 
 const theme = createMuiTheme({
   palette: {
@@ -93,6 +94,9 @@ function App() {
             </Route>
             <Route path ="/reviews">
               <Reviews/>
+            </Route>
+            <Route path="/test">
+              <Test/>
             </Route>
          </Layout>
         </Switch>

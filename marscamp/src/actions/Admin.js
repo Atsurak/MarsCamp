@@ -1,7 +1,6 @@
 import React from 'react';
 import {DeleteOutlined} from '@material-ui/icons';
 import { IconButton} from '@material-ui/core';
-//import Student from '../actions/Student';
  
 export default function Admin({utype,note}){
     

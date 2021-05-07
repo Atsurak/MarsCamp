@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import Container from '@material-ui/core/Container'
-import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Paper, TextField, Typography, Button } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Container, useMediaQuery, useTheme ,makeStyles, Avatar, List, ListItem, ListItemAvatar, ListItemText, MenuItem, TextField, Typography, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import ForumPost from '../forms/ForumPost';
-import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme ,makeStyles} from '@material-ui/core/styles';
 import {formatDistanceToNowStrict} from 'date-fns';
 const useStyles = makeStyles(() => ({
   heading : {
@@ -58,7 +54,7 @@ export default function Forum() {
 
     }
     
-  }, [])
+  })
 
   const handleChange = async (id) =>{
 

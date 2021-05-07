@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import {DeleteOutlined} from '@material-ui/icons';
-import { IconButton, Button } from '@material-ui/core';
+import React from 'react';
 import Student from '../actions/Student';
 import Faculty from '../actions/Faculty';
 import Admin from '../actions/Admin';

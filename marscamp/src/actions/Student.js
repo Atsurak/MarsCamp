@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { Button, MenuItem, makeStyles } from '@material-ui/core';
+import { useTheme, useMediaQuery, Button, MenuItem, makeStyles, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { green } from '@material-ui/core/colors';
-import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(()=>{
     return{

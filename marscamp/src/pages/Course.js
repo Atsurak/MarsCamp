@@ -21,16 +21,18 @@ export default function Course(){
   const [notes, setNotes] = useState([]);
   const history = useHistory();
   const classes = useStyles();
-  const [color,setColor]=useState();
 
   const userToken = JSON.parse(localStorage.getItem('token'))[0];
   const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
   let id = 1;
-  if(history.location.state!=undefined){
+  if(history.location.state!==undefined){
     id = history.location.state.id;
   }
-  if(utype===1){
+  else if(utype===1){
     id=userToken.course_id;
+  }
+  else{
+    history.push('/home');
   }
 
   useEffect(() => {
@@ -43,13 +45,13 @@ export default function Course(){
      .then(res=>res.json())
      .then(data=>setCourse(data[0]))
      console.log(id);
-  }, [])
+  }, [id])
 
   const handleDelete = async (id) => {
     await fetch('http://localhost:8000/courses/' + id, {
       method: 'DELETE'
     })
-    const newNotes = notes.filter(note => note.id != id)
+    const newNotes = notes.filter(note => note.id !== id)
     setNotes(newNotes)
   }
 

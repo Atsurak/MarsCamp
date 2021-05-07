@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => {
 
 export default function Layout({ children }) {
   const classes = useStyles();
+  // eslint-disable-next-line
   const {token,setToken} = useToken();
   let userToken = {};
   if(token){

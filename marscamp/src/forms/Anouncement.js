@@ -20,7 +20,7 @@ export default function Announcement() {
   const [detailsError, setDetailsError] = useState(false);
   const type = 'announcement';
   const userToken = JSON.parse(localStorage.getItem('token'))[0];
-  const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+  //const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
   const course_id = userToken.course_id;
   const user_id = userToken.registration_no;
 

@@ -1,4 +1,4 @@
-import { Button, Container, makeStyles, Paper, TextField } from '@material-ui/core';
+import { Button, Container, makeStyles, TextField } from '@material-ui/core';
 import { Send} from '@material-ui/icons';
 import React, { useState } from 'react';
 

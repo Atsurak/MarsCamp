@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
+import {Typography, Button, makeStyles, TextField} from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import { Input, makeStyles } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   field: {
@@ -25,16 +20,14 @@ const useStyles = makeStyles({
 
 export default function Material() {
   const classes = useStyles();
-  const history = useHistory();
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [file_path, setFilepath] = useState('');
-
   const [titleError, setTitleError] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
   const type = 'material';
   const userToken = JSON.parse(localStorage.getItem('token'))[0];
-  const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
+  //const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
   const course_id = userToken.course_id;
   const user_id = userToken.registration_no;
 
