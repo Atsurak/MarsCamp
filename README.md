@@ -27,13 +27,15 @@ For setting up this project on your local machine you need to install
 3. MySQL Workbench (for managing users if necessary)
 4. Having MySQL server installed would also be sufficient.
 
-5. Clone this repository using the link above or run `git clone https://github.com/Evadore/MarsCamp.git` in your terminal.
-6. Go to `marscamp` directory and run `npm install` to automatically install all necessary dependencies required for running the frontend of this project .
-7. Now before starting with the backend make sure you have all the necessary dependencies installed and you are able to view the signin page by running `npm start` in your terminal and visit [http://localhost:3000](http://localhost:3000) in your favorite browser .
-8. If you had any problem till this point please google your error and if you are still unable to fix it consider raising a ISSUE here.
-9. Now for setting up the backend server Go to the `Server` directory and repeat step 2.
-10. Now setup your mysql script in the `scripts` folder remember to replace `your_password` with your MySQL password. \
-    copy and paste this script in `Server/scripts/mysql.js`
+### Setup
+
+1. Clone this repository using the link above or run `git clone https://github.com/Evadore/MarsCamp.git` in your terminal.
+2. Go to `marscamp` directory and run `npm install` to automatically install all necessary dependencies required for running the frontend of this project .
+3. Now before starting with the backend make sure you have all the necessary dependencies installed and you are able to view the signin page by running `npm start` in your terminal and visit [http://localhost:3000](http://localhost:3000) in your favorite browser .
+4. If you had any problem till this point please google your error and if you are still unable to fix it consider raising a ISSUE here.
+5. Now for setting up the backend server Go to the `Server` directory and repeat step 2.
+6. Now setup your mysql script in the `scripts` folder remember to replace `your_password` with your MySQL password. \
+   copy and paste this script in `Server/scripts/mysql.js`
 
 ```
 var mysql = require('mysql')
