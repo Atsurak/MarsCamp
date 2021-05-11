@@ -6,6 +6,8 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL,
     first_and_last_name VARCHAR(100) NOT NULL,
     user_type VARCHAR(7) NOT NULL,
+    pwd VARCHAR(100) NOT NULL,
+    CONSTRAINT email_const UNIQUE (email),
     PRIMARY KEY (registration_no)
 );
 
@@ -13,22 +15,28 @@ CREATE TABLE courses (
 	course_id INT NOT NULL AUTO_INCREMENT,
     course_title VARCHAR(100) NOT NULL,
     course_desc VARCHAR(300) NOT NULL,
+    difficulty VARCHAR(30) NOT NULL,
     PRIMARY KEY (course_id)
 );
 
 CREATE TABLE student (
+	student_id INT NOT NULL AUTO_INCREMENT,
 	user_id VARCHAR(10) NOT NULL,
-	course_id INT NOT NULL,
+	course_id INT,
     CONSTRAINT fk_stud_user FOREIGN KEY (user_id) REFERENCES users(registration_no) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_stud_course FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT fk_stud_course FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT student_const UNIQUE (user_id, course_id),
+    PRIMARY KEY (student_id)
 );
 
 CREATE TABLE instructor (
+	faculty_id INT NOT NULL AUTO_INCREMENT,
 	approval BOOLEAN NOT NULL,
 	user_id VARCHAR(10) NOT NULL,
-	course_id INT NOT NULL,
+	course_id INT,
     CONSTRAINT fk_inst_user FOREIGN KEY (user_id) REFERENCES users(registration_no) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_inst_course FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT fk_inst_course FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE SET NULL ON UPDATE CASCADE,
+    PRIMARY KEY (faculty_id)
 );
 
 CREATE TABLE feedback (
@@ -48,6 +56,9 @@ CREATE TABLE course_content (
     content VARCHAR(10000) NOT NULL,
 	user_id VARCHAR(10) NOT NULL,
 	course_id INT NOT NULL,
+    content_type VARCHAR(15) NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    file_path VARCHAR(255) DEFAULT NULL,
     CONSTRAINT fk_crcn_user FOREIGN KEY (user_id) REFERENCES users(registration_no) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_crcn_course FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (content_id)
@@ -63,46 +74,3 @@ CREATE TABLE questions (
     CONSTRAINT fk_que_course FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY(question_id)
 );
-
-CREATE TABLE filetest (
-	id INT NOT NULL AUTO_INCREMENT,
-    file_route VARCHAR(500) NOT NULL,
-    PRIMARY KEY(id)
-);
-
-ALTER TABLE student ADD student_id INT NOT NULL;
-ALTER TABLE student ADD PRIMARY KEY (student_id);
-ALTER TABLE student
-MODIFY COLUMN student_id INT NOT NULL AUTO_INCREMENT;
-ALTER TABLE instructor ADD faculty_id INT NOT NULL;
-ALTER TABLE instructor ADD PRIMARY KEY (faculty_id);
-ALTER TABLE instructor
-MODIFY COLUMN faculty_id INT NOT NULL AUTO_INCREMENT;
-ALTER TABLE instructor
-MODIFY COLUMN course_id INT;
-ALTER TABLE users MODIFY COLUMN pwd VARCHAR(100) NOT NULL;
-ALTER TABLE student MODIFY COLUMN course_id INT;
-ALTER TABLE users ADD CONSTRAINT email_const UNIQUE (email);
-ALTER TABLE student ADD CONSTRAINT student_const UNIQUE (user_id, course_id);
-ALTER TABLE instructor DROP FOREIGN KEY fk_inst_course;
-ALTER TABLE instructor ADD FOREIGN KEY (course_id) REFERENCES courses (course_id) ON DELETE SET NULL;
-ALTER TABLE courses ADD difficulty VARCHAR(30) NOT NULL;
-ALTER TABLE course_content ADD content_type VARCHAR(15) NOT NULL;
-ALTER TABLE course_content ADD title VARCHAR(50) NOT NULL;
-ALTER TABLE course_content ADD file_path VARCHAR(255) DEFAULT NULL;
-
-SELECT LAST_INSERT_ID(content_id) From course_content;
-
-DESCRIBE users;
-DESCRIBE courses;
-DESCRIBE student;
-DESCRIBE instructor;
-DESCRIBE feedback;
-DESCRIBE course_content;
-
-SELECT * FROM users;
-SELECT * FROM courses;
-SELECT * FROM student;
-SELECT * FROM instructor;
-SELECT * FROM feedback;
-SELECT * FROM course_content;
