@@ -36,11 +36,6 @@ export default function SideLinks(){
       path: '/create' ,
     },
     {
-      text : 'Create Post',
-      icon : <AddCircleOutlineOutlined color="secondary" />,
-      path : '/post',
-    },
-    {
       text : 'Forum',
       icon : <ForumOutlined color="secondary" />,
       path : '/forum',

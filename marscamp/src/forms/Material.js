@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {Typography, Button, makeStyles, TextField} from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles({
   field: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
 
 export default function Material() {
   const classes = useStyles();
+  const history = useHistory();
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [file_path, setFilepath] = useState('');
@@ -49,7 +51,7 @@ export default function Material() {
          method: 'POST',
          headers: {"Content-type": "application/json"},
          body: JSON.stringify({ content : details, user_id, course_id,title, type, file_path })
-      })
+      }).then(() => history.push('/'))
     } 
   }
 

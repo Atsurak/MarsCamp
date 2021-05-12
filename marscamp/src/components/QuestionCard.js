@@ -19,7 +19,7 @@ export default function QuestionCard({ question}) {
               <FormControl>
                 <FormLabel>Choose Your Option</FormLabel>
               </FormControl>
-              <RadioGroup aria-label="quiz" name="quiz" value={option[question.question_id]} onChange={(e)=> setOption(e.target.value)}>
+              <RadioGroup aria-label="quiz" name={question.question_id} value={option[question.question_id]} onChange={(e)=> setOption(e.target.value)}>
                   <FormControlLabel value="A" control={<Radio />} label={choices[0]} />
                   <FormControlLabel value="B" control={<Radio />} label={choices[1]} />
                   <FormControlLabel value="C" control={<Radio />} label={choices[2]} />

@@ -1,6 +1,7 @@
 import { Button, Container, makeStyles, TextField } from '@material-ui/core';
 import { Send} from '@material-ui/icons';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 
 
 const useStyles = makeStyles({
@@ -17,6 +18,7 @@ const useStyles = makeStyles({
 
 export default function ForumPost({forum}){
     const classes = useStyles();
+    const history = useHistory();
     const [title, setTitle] = useState('');
     const [details, setDetails] = useState('');
     const [titleError, setTitleError] = useState(false);
@@ -50,6 +52,7 @@ export default function ForumPost({forum}){
       }).then(()=>{
         setTitle('');
         setDetails('');
+        history.push('/forum');
       })
     } 
   }

@@ -22,6 +22,7 @@ export default function Test(){
     const history = useHistory();
     const classes = useStyles();
     const [questions,setQuestions] = useState([]);
+    const [answers,setAnswers]= useState([]);
     const userToken = JSON.parse(localStorage.getItem('token'))[0];
     //const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
   
@@ -36,8 +37,10 @@ export default function Test(){
     const handleformSubmit = (e) =>{
     e.preventDefault();
     console.log('i ran');
-    console.log(e.target);
+    
+      console.log(e.target);
     }
+
 
     useEffect(() => {
     fetch('http://localhost:5000/question/get/'+id)
@@ -49,7 +52,7 @@ export default function Test(){
 
     return(
     <Container>
-        <div> Working Component {id}</div>
+        {/* <div> Working Component {id}</div> */}
         <form onSubmit={handleformSubmit}>
             {questions.map(ques=>(
                 <div key={ques.question_id} >

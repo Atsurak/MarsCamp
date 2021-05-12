@@ -42,7 +42,7 @@ export default function Feedback(){
         method: 'POST',
         headers: {"Content-type": "application/json"},
         body: JSON.stringify({ content, user_id, course_id})
-      })
+      }).then(() => history.push('/'))
     } 
   }
 
