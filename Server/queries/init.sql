@@ -1,5 +1,5 @@
 CREATE SCHEMA marscamp;
-
+USE marscamp;
 CREATE TABLE users (
 	registration_no VARCHAR(10) NOT NULL,
 	phone_no VARCHAR(13) NOT NULL,
