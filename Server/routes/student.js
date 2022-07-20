@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express()
-const mysql = require('mysql')
+const mysql = require('mysql2')
 const pool = require('../scripts/mysql')
 
 router.post('/enroll', (req, res) => {
