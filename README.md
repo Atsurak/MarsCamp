@@ -29,7 +29,7 @@ For setting up this project on your local machine you need to install
 
 ### Setup
 
-1. Clone this repository using the link above or run `git clone https://github.com/Evadore/MarsCamp.git` in your terminal.
+1. Clone this repository using the link above or run `git clone https://github.com/Atsurak/MarsCamp.git` in your terminal.
 2. Go to `marscamp` directory and run `npm install` to automatically install all necessary dependencies required for running the frontend of this project .
 3. Now before starting with the backend make sure you have all the necessary dependencies installed and you are able to view the signin page by running `npm start` in your terminal and visit [http://localhost:3000](http://localhost:3000) in your favorite browser .
 4. If you had any problem till this point please google your error and if you are still unable to fix it consider raising a ISSUE here.
@@ -67,5 +67,3 @@ await fetch('http://localhost:5000/auth/signup', {
 Congrats on Setting up Mars Camp. If you have any feature suggestions or found any bugs please consider raising an ISSUE or contact us on Twitter.
 
 Happy Learning!
-
-P.S : We are working on making a deployed version available soon
