@@ -1,6 +1,7 @@
 # dependencies
 */node_modules
+/node_modules
 
 # user data
 /marscamp/public/Server
-/Server/scripts/mysql.js
+*/.env
