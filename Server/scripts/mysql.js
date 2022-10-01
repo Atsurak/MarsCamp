@@ -4,7 +4,7 @@ const port = process.env.DBPORT;
 const user = process.env.DBUSER;
 const pwd = process.env.DBPWD;
 const schema = process.env.DBSCHEMA;
-console.log(host,port,user,pwd,schema)
+console.log(host,port,user,pwd,schema);
 const mysql = require('mysql2')
 const pool = mysql.createPool({
     host: host,
@@ -14,6 +14,6 @@ const pool = mysql.createPool({
     database: schema,
     connectionLimit: 10,
     multipleStatements: true
-})
+});
 
 module.exports = pool

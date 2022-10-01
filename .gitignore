@@ -1,7 +1,6 @@
 # dependencies
 */node_modules
-/node_modules
 
 # user data
 /marscamp/public/Server
-*/.env
+*.env

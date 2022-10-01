@@ -3,7 +3,6 @@ import Container from '@material-ui/core/Container'
 import Masonry from 'react-masonry-css'
 import NoteCard from '../components/NoteCard'
 import { useHistory } from 'react-router';
-import { Button } from '@material-ui/core';
 
 export default function Home() {
   const [notes, setNotes] = useState([]);

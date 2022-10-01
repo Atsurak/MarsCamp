@@ -22,9 +22,6 @@ export default function Test(){
     const history = useHistory();
     const classes = useStyles();
     const [questions,setQuestions] = useState([]);
-    const [answers,setAnswers]= useState([]);
-    const userToken = JSON.parse(localStorage.getItem('token'))[0];
-    //const utype = userToken.user_type === 'STUDENT'? 0 : (userToken.user_type==='FACULTY'? 1 : -1 );
   
     let id = 1;
     if(history.location.state!==undefined){
@@ -52,7 +49,6 @@ export default function Test(){
 
     return(
     <Container>
-        {/* <div> Working Component {id}</div> */}
         <form onSubmit={handleformSubmit}>
             {questions.map(ques=>(
                 <div key={ques.question_id} >
