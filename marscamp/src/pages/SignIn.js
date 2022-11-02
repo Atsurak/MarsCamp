@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import {makeStyles, Typography, Avatar, Button, CssBaseline, TextField, Checkbox, Link, Grid, Box, Container, FormControlLabel} from '@material-ui/core';
+import { makeStyles, Typography, Avatar, Button, CssBaseline, TextField, Checkbox, Link, Grid, Box, Container, FormControlLabel } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Copyright from '../components/Copyright';
 import { useHistory } from 'react-router';
 
-const loginUser = async (credentials) =>{
+const loginUser = async (credentials) => {
   // eslint-disable-next-line
-  const req = 'http://localhost:5000/auth/login?'+'email='+credentials.email+'&pwd='+credentials.password ;
+  const req = 'http://localhost:5000/auth/login?' + 'email=' + credentials.email + '&pwd=' + credentials.password;
   console.log(req);
   return await fetch(req)
-  .then(data=>data.json())
+    .then(data => data.json()).catch(err => {
+      console.log("Failed to Get User Info");
+    })
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -32,19 +34,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({setToken}) {
+export default function SignIn({ setToken }) {
   const classes = useStyles();
-  const [email,setEmail] = useState();
-  const [password,setPassword] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const history = useHistory();
 
-  const handleSubmit = async e =>{
+  const handleSubmit = async e => {
     e.preventDefault();
-    const token = await loginUser({
+    await loginUser({
       email,
       password
+    }).then(data => {
+      if (data && data !== "undefined") setToken(data)
     });
-    setToken(token);
     history.push('/');
   }
 
@@ -52,9 +55,9 @@ export default function SignIn({setToken}) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar src="/mars.png" className={classes.avatar}/>
-          {/* <LockOutlinedIcon /> */}
-        
+        <Avatar src="/mars.png" className={classes.avatar} />
+        {/* <LockOutlinedIcon /> */}
+
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -70,7 +73,7 @@ export default function SignIn({setToken}) {
             name="email"
             autoComplete="off"
             autoFocus
-            onChange = {e=>setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -83,7 +86,7 @@ export default function SignIn({setToken}) {
             type="password"
             id="password"
             autoComplete="off"
-            onChange={e=>setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="secondary" />}
@@ -120,5 +123,5 @@ export default function SignIn({setToken}) {
 }
 
 SignIn.propTypes = {
-  setToken : PropTypes.func.isRequired
+  setToken: PropTypes.func.isRequired
 }

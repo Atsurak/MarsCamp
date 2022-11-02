@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Container from '@material-ui/core/Container'
 import Masonry from 'react-masonry-css'
-import PostCard from '../cards/PostCard';
 import { useHistory } from 'react-router';
+import Container from '@material-ui/core/Container'
 import { Chip, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import PostCard from '../cards/PostCard';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 export default function Course(){
   const [course, setCourse] = useState('');
   const [notes, setNotes] = useState([]);

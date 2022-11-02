@@ -59,7 +59,7 @@ export default function SideLinks(){
         { 
       text: 'Courses', 
       icon: <ClassIcon color="secondary" />, 
-      path: '/' ,
+      path: '/course' ,
     },
     {
       text : 'Create Post',

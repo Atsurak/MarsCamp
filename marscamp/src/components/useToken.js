@@ -4,7 +4,8 @@ export default function useToken() {
   const getToken = () => {
     const tokenString = localStorage.getItem('token');
     const userToken = JSON.parse(tokenString);
-    if(userToken){
+    console.log(userToken);
+    if(userToken && userToken!=="undefined"){
       return userToken[0].email
     }
   };
